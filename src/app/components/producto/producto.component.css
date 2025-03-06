@@ -1,0 +1,17 @@
+.Productos {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.Producto{
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.Producto img{
+    width: 100%;
+    height: auto;
+}
