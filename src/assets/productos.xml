@@ -1,0 +1,20 @@
+<productos>
+  <producto>
+    <id>1</id>
+    <nombre>Laptop</nombre>
+    <precio>1200</precio>
+    <imagen>assets/laptop.png</imagen>
+  </producto>
+  <producto>
+    <id>2</id>
+    <nombre>Celular</nombre>
+    <precio>800</precio>
+    <imagen>assets/celular.png</imagen>
+  </producto>
+  <producto>
+    <id>3</id>
+    <nombre>Tablet</nombre>
+    <precio>400</precio>
+    <imagen>assets/tablet.png</imagen>
+  </producto>
+</productos>
