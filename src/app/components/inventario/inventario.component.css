@@ -1,0 +1,135 @@
+.inventario-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #4a1d72;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+h3 {
+  color: #4a1d72;
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.btn-nav {
+  background-color: #4a1d72;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btn-editar {
+  background-color: #6a4a8f;
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: #d9534f;
+  color: white;
+}
+
+.btn-agregar {
+  background-color: #5bc0de;
+  color: white;
+}
+
+.btn-guardar {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.btn-cancelar {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.productos-lista {
+  margin-top: 30px;
+}
+
+.productos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+  background-color: #f4f4f4;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-row:hover {
+  background-color: #e6e6e6;
+}
+
+.producto-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.formulario-edicion,
+.formulario-agregar {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  color: #444;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.preview img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+}

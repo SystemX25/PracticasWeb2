@@ -1,38 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../services/producto.service';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { CarritoService } from '../../services/carrito.service.ts.service';
+import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-producto',
-  standalone: true, // Asegúrate de que el componente sea standalone
-  imports: [CommonModule], // Agrega CommonModule aquí
+  imports: [CommonModule],
   templateUrl: './producto.component.html',
-  styleUrl: './producto.component.css'
+  styleUrl: './producto.component.css',
 })
+
 export class ProductoComponent implements OnInit {
   public productos: Producto[] = [];
-
   constructor(
     private productoService: ProductoService,
     private carritoService: CarritoService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.productoService.obtenerProductos().subscribe((data: Producto[]) => {
-      this.productos = data;
-    });
+    private router:Router
+  ) { }
+  async ngOnInit() {
+    this.productos = await lastValueFrom(this.productoService.obtenerProducto()).then((prods) => prods);
   }
 
-  agregarACarrito(producto: Producto): void {
+  agregarAlCarrito(producto:any) {
     this.carritoService.agregarProducto(producto);
-    alert('Producto agregado al carrito');
   }
 
-  irACarrito(): void {
+  irAlCarrito() {
     this.router.navigate(['/carrito']);
+  }
+
+  irAlInventario() {
+    this.router.navigate(['/inventario']);
   }
 }
