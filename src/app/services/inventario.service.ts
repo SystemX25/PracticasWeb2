@@ -83,50 +83,39 @@ export class InventarioService {
     const productos = this.productosSubject.value;
     const xml = this.generarXML(productos);
 
-  
+    // Guardar en localStorage
     localStorage.setItem('productos', xml);
 
-  
-    this.descargarXML(xml);
+    // Descargar el archivo productos.xml automáticamente
+    const blob = new Blob([xml], { type: 'application/xml' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'productos.xml';
+    a.click();
+    window.URL.revokeObjectURL(url);
 
-    console.log('XML actualizado:', xml);
+    console.log('XML actualizado y descargado:', xml);
   }
 
   private generarXML(productos: Producto[]): string {
-    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-    xml += `<?xml-stylesheet type="text/xsl" href="productos.xsl"?>\n`;
-    xml += `<productos>\n`;
+    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<productos>\n';
   
-  
-    const productosOrdenados = [...productos].sort((a, b) =>
-      a.nombre.localeCompare(b.nombre)
-    );
-  
-    productosOrdenados.forEach(producto => {
-      xml += `  <producto id="${producto.id}">\n`;
-      xml += `    <nombre>${producto.nombre}</nombre>\n`;
-      xml += `    <precio>${producto.precio}</precio>\n`;
-      xml += `    <cantidad>${producto.cantidad}</cantidad>\n`;
-      xml += `  </producto>\n`;
+    // Iteramos sobre cada producto
+    productos.forEach(p => {
+      xml += `  <producto>\n`; // Apertura de cada producto
+      
+      // Añadimos cada propiedad en su propia línea
+      xml += `    <id>${p.id}</id>\n`;
+      xml += `    <nombre>${p.nombre}</nombre>\n`;
+      xml += `    <precio>${p.precio}</precio>\n`;
+      xml += `    <imagen>${p.imagen}</imagen>\n`;
+      
+      xml += `  </producto>\n`; // Cierre de cada producto
     });
   
-    xml += `</productos>\n`;
+    xml += '</productos>';
   
     return xml;
-  }
-  
-
-  private descargarXML(xml: string): void {
-    const blob = new Blob([xml], { type: 'application/xml' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.download = 'productos.xml';
-    a.href = url;
-    
-    document.body.appendChild(a);
-    a.click();
-
-    URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-  }
+  }  
 }
