@@ -1,19 +1,20 @@
 <div class="carrito-container">
   <h2>🛒 CETI BURGUER</h2>
 
-  <div *ngIf="carritoAgrupado.length > 0">
+  <div *ngIf="carritoAgrupado.length > 0" class="contendor">
     <ul class="producto-lista">
       <li *ngFor="let producto of carritoAgrupado">
         <div class="producto-info">
           <img [src]="producto.imagen" alt="Producto" class="producto-imagen" />
           <div class="producto-detalles">
-            <span class="producto-nombre">{{ producto.nombre }} x{{ producto.cantidad }}</span>
+            <span class="producto-nombre">{{ producto.nombre }}</span>
             <span class="producto-precio">$ {{ producto.precioTotal.toFixed(2) }}</span>
           </div>
         </div>
-        <div class="botones">
-          <button class="boton" (click)="eliminarProducto(producto.id)">-</button>
-          <button class="boton boton-agregar" (click)="agregarProducto(producto)">+</button>
+        <div>
+          <button class="boton-eliminar" (click)="eliminarProducto(producto.id)">-</button>
+          <span class="producto-nombre">x{{ producto.cantidad }}</span>
+          <button class="boton-agregar" (click)="agregarProducto(producto)">+</button>
         </div>
       </li>
     </ul>

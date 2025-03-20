@@ -75,4 +75,28 @@
     color: #512214;
     margin-top: 2rem;
   }
+  .boton-agregar{
+    background-color: #3ac92d;
+    border: none;
+    color: white;
+    margin-left: 5px;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .boton-eliminar{
+    background-color: #f10d0d;
+    border: none;
+    color: white;
+    margin-left: 100px;
+    margin-right: 5px;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .producto-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   
