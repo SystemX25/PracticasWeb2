@@ -81,7 +81,13 @@ export class CarritoService {
     return xml;
   }
 
-  eliminarProducto(producto: Producto){
-    this.carrito.splice(producto.id, 1);
+  eliminarProducto(id: number) {
+    const index = this.carrito.findIndex(producto => producto.id === id);
+    if (index !== -1) {
+      this.carrito.splice(index, 1);
+    }
   }
+
+ 
+  
 }

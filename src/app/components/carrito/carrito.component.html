@@ -1,23 +1,27 @@
 <div class="carrito-container">
-    <h2>🛒 CETI BURGUER</h2>
-  
-    <div *ngIf="carrito.length > 0">
-      <ul class="producto-lista">
-        <li *ngFor="let producto of carrito; let i = index">
-          <div class="producto-info">
-            <img [src]="producto.imagen" alt="Producto" class="producto-imagen" />
-            <div class="producto-detalles">
-              <span class="producto-nombre">{{ producto.nombre }}</span>
-              <span class="producto-precio">$ {{ producto.precio }}</span>
-            </div>
+  <h2>🛒 CETI BURGUER</h2>
+
+  <div *ngIf="carritoAgrupado.length > 0">
+    <ul class="producto-lista">
+      <li *ngFor="let producto of carritoAgrupado">
+        <div class="producto-info">
+          <img [src]="producto.imagen" alt="Producto" class="producto-imagen" />
+          <div class="producto-detalles">
+            <span class="producto-nombre">{{ producto.nombre }} x{{ producto.cantidad }}</span>
+            <span class="producto-precio">$ {{ producto.precioTotal.toFixed(2) }}</span>
           </div>
-          <button class="boton" (click)="eliminarProducto(i)">Eliminar</button>
-        </li>
-      </ul>
-      <button class="boton boton-generar" (click)="generarXML()">📄 Generar XML</button>
-    </div>
+        </div>
+        <div class="botones">
+          <button class="boton" (click)="eliminarProducto(producto.id)">-</button>
+          <button class="boton boton-agregar" (click)="agregarProducto(producto)">+</button>
+        </div>
+      </li>
+    </ul>
+    <button class="boton boton-generar" (click)="generarXML()">📄 Generar XML</button>
+  </div>
+
+  <p class="carrito-vacio" *ngIf="carritoAgrupado.length === 0">
+    El carrito está vacío
+  </p>
   
-    <p class="carrito-vacio" *ngIf="carrito.length === 0">
-      El carrito está vacío
-    </p>
-  </div>  
+</div>
