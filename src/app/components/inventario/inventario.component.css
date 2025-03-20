@@ -126,3 +126,26 @@ body {
       padding: 10px;
     }
   }
+
+  .btn-ir {
+    background-color: #17a2b8; /* Color azul turquesa */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    margin-top: 10px;
+    width: auto; /* Ajusta el ancho al contenido */
+    display: inline-block; /* Para que no ocupe todo el ancho */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Transición suave al hacer hover */
+}
+
+.btn-ir:hover {
+    background-color: #138496; /* Color más oscuro al hacer hover */
+}
+
+.btn-ir:active {
+    background-color: #117a8b; /* Color aún más oscuro al hacer clic */
+}

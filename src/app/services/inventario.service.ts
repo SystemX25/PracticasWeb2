@@ -58,4 +58,5 @@ export class InventarioService {
 
     localStorage.setItem('inventarioXML', xml);
   }
+
 }

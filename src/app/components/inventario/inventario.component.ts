@@ -4,6 +4,7 @@ import { Producto } from '../../models/producto';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inventario',
@@ -17,7 +18,7 @@ export class InventarioComponent {
 
   nuevoProducto: Producto = { id: 0, nombre: '', precio: 0, imagen: '' };
 
-  constructor(public inventarioService: InventarioService) {
+  constructor(public inventarioService: InventarioService, private router: Router) {
     this.productos$ = this.inventarioService.productos$; // Asignación dentro del constructor
   }
 
@@ -54,5 +55,9 @@ export class InventarioComponent {
 
   descargarXML() {
     this.inventarioService.generarXML();
+  }
+
+  irAProducto() {
+    this.router.navigate(['']);
   }
 }
