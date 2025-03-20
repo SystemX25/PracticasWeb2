@@ -1,46 +1,53 @@
-<h2>Gestión de Inventario</h2>
+<h2 class="titulo">Gestión de Inventario 🍔</h2>
+<div class="formato">
+    <!-- Formulario para agregar un nuevo producto -->
+  <form (submit)="agregarProducto()" class="formulario">
+    <label for="idPro">Id del producto</label>
+    <input type="number" id="idPro" [(ngModel)]="nuevoProducto.id" name="id" required />
 
-<!-- Formulario para agregar un nuevo producto -->
-<form (submit)="agregarProducto()">
-  <label for="idPro">Id del producto</label>
-  <input type="number" id="idPro" [(ngModel)]="nuevoProducto.id" name="nombre" required />
-  
-  <label for="nombrePro">Nombre:</label>
-  <input type="text" id="nombrePro" [(ngModel)]="nuevoProducto.nombre" name="nombre" required />
+    <label for="nombrePro">Nombre:</label>
+    <input type="text" id="nombrePro" [(ngModel)]="nuevoProducto.nombre" name="nombre" required />
 
-  <label for="precioPro">Precio:</label>
-  <input type="number" id="precioPro" [(ngModel)]="nuevoProducto.precio" name="precio" required />
+    <label for="precioPro">Precio:</label>
+    <input type="number" id="precioPro" [(ngModel)]="nuevoProducto.precio" name="precio" required />
 
-  <label for="imagenPro">Seleccionar Imagen:</label>
-  <input type="file" id="imagenPro"  accept="image/png" />
+    <label for="imagenPro">URL de la imagen:</label>
+    <input type="text" id="imagenPro" [(ngModel)]="nuevoProducto.imagen" name="imagen" />
 
+    <button type="submit" class="btn btn-agregar">Agregar Producto</button>
+  </form>
 
-  <button type="submit">Agregar Producto</button>
-</form>
+  <div class="contenedor">
+    <!-- Tabla para mostrar los productos -->
+    <div class="tabla-contenedor">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productos$ | async">
+            <td>{{ producto.id }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.precio | currency }}</td>
+            <td>
+              <img [src]="producto.imagen" alt="Imagen del producto" class="img-producto">
+            </td>
+            <td>
+              <button class="btn btn-eliminar" (click)="eliminarProducto(producto.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<!-- Tabla para mostrar los productos -->
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Precio</th>
-      <th>Imagen</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let producto of productos$ | async">
-      <td>{{ producto.id }}</td>
-      <td>{{ producto.nombre }}</td>
-      <td>{{ producto.precio | currency }}</td>
-      <td><img [src]="producto.imagen" alt="Imagen del producto" width="50"></td>
-      <td>
-        <button (click)="eliminarProducto(producto.id)">Eliminar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <!-- Botón para descargar el inventario en XML -->
+    <button (click)="descargarXML()" class="btn btn-descargar">Descargar XML</button>
+  </div>
 
-<!-- Botón para descargar el inventario en XML -->
-<button (click)="descargarXML()">Descargar XML</button>
+</div>
