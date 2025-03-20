@@ -27,17 +27,25 @@ export class InventarioComponent {
       return;
     }
 
-    const nuevoProducto: Producto = {
-      id: this.nuevoProducto.id,
-      nombre: this.nuevoProducto.nombre,
-      precio: this.nuevoProducto.precio,
-      imagen: this.nuevoProducto.imagen || `asset\noimagen.jpg`, // Imagen por defecto  
-    };
+    // Verificar si la ID ya existe en la lista de productos
+    this.productos$.subscribe(productos => {
+      if (productos.some(producto => producto.id === this.nuevoProducto.id)) {
+        alert("La ID del producto ya existe. Por favor, elija otra.");
+        return;
+      } else {
+        const nuevoProducto: Producto = {
+          id: this.nuevoProducto.id,
+          nombre: this.nuevoProducto.nombre,
+          precio: this.nuevoProducto.precio,
+          imagen: this.nuevoProducto.imagen || `asset/noimagen.jpg`, // Imagen por defecto  
+        };
 
-    this.inventarioService.agregarProducto(nuevoProducto);
+        this.inventarioService.agregarProducto(nuevoProducto);
 
-    // Reiniciar formulario
-    this.nuevoProducto = { id: 0, nombre: '', precio: 0, imagen: '' };
+        // Reiniciar formulario
+        this.nuevoProducto = { id: 0, nombre: '', precio: 0, imagen: '' };
+      }
+    });
   }
 
   eliminarProducto(id: number) {
@@ -48,4 +56,3 @@ export class InventarioComponent {
     this.inventarioService.generarXML();
   }
 }
-
