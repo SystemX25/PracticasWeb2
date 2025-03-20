@@ -11,8 +11,9 @@
   <label for="precioPro">Precio:</label>
   <input type="number" id="precioPro" [(ngModel)]="nuevoProducto.precio" name="precio" required />
 
-  <label for="imagenPro">URL de la imagen:</label>
-  <input type="text" id="imagenPro" [(ngModel)]="nuevoProducto.imagen" name="imagen" />
+  <label for="imagenPro">Seleccionar Imagen:</label>
+  <input type="file" id="imagenPro" (change)="onFileSelected($event)" accept="image/png" />
+
 
   <button type="submit">Agregar Producto</button>
 </form>

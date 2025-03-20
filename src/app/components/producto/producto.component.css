@@ -1,17 +1,82 @@
+.toolbar {
+    background: linear-gradient(90deg, #005bea, #00c6fb); /* Degradado de azul */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: white;
+    color: #005bea;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #005bea;
+    color: white;
+    transform: scale(1.1);
+}
 .productos {
     display: flex;
-    gap: 20px;
     flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
 }
 
 .producto {
-    border: 1px solid #ccc;
-    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
     text-align: center;
-    width: 200px;
+    width: 220px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .producto img {
     width: 100%;
-    height: auto;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.producto h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.producto p {
+    font-size: 16px;
+    color: #666;
+}
+
+.boton-agregar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.boton-agregar:hover {
+    background-color: #0056b3;
 }

@@ -1,3 +1,9 @@
+<div class = "toolbar">
+    <img src="asset/logo.png" alt="logo de la empresa" width="75px" height="75px"/>
+    <h2>CETI BURGUER</h2>
+    <button (click)="irAlCarrito()">Ver Carrito</button>
+    <button (click)="irInventario()">Ir a Inventario</button>
+</div>
 <h2>Catalago de Productos</h2>
 <div class = "productos">
     <div *ngFor = "let producto of productos | async" class="producto">
@@ -7,5 +13,4 @@
         <button (click)="agregarAlCarrito(producto)">Agregar al Carrito</button>
     </div>
 </div>
-<button (click)="irAlCarrito()">Ver Carrito</button>
-<button (click)="irInventario()">Ir a Inventario</button>
+
