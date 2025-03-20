@@ -31,7 +31,10 @@ export class InventarioComponent {
       id: this.nuevoProducto.id,
       nombre: this.nuevoProducto.nombre,
       precio: this.nuevoProducto.precio,
-      imagen: this.nuevoProducto.imagen || 'https://via.placeholder.com/150'
+      imagen: this.nuevoProducto.imagen 
+      ? `asset/images/${this.nuevoProducto.imagen}`
+      : 'asset/images/noimagen.png' // Imagen por defecto
+      
     };
 
     this.inventarioService.agregarProducto(nuevoProducto);
