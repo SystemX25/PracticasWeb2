@@ -1,5 +1,5 @@
 .toolbar {
-    background: linear-gradient(90deg, #005bea, #00c6fb); /* Degradado de azul */
+    background: #FFAA01; /* Amarillo pan */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,8 +11,8 @@
 }
 
 button {
-    background-color: white;
-    color: #005bea;
+    background-color: #FF8731; /* Naranja queso */
+    color: white;
     border: none;
     padding: 12px 25px;
     border-radius: 8px;
@@ -22,16 +22,18 @@ button {
 }
 
 button:hover {
-    background-color: #005bea;
+    background-color: #512214; /* Marrón carne */
     color: white;
     transform: scale(1.1);
 }
+
 .productos {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
     padding: 20px;
+    background-color: #F5F5F5; /* Fondo gris claro */
 }
 
 .producto {
@@ -59,7 +61,7 @@ button:hover {
 .producto h3 {
     font-size: 18px;
     margin: 10px 0;
-    color: #333;
+    color: #512214; /* Marrón carne */
 }
 
 .producto p {
@@ -68,7 +70,7 @@ button:hover {
 }
 
 .boton-agregar {
-    background-color: #007bff;
+    background-color: #087E8B; /* Verde lechuga */
     color: white;
     border: none;
     padding: 10px;
@@ -78,5 +80,5 @@ button:hover {
 }
 
 .boton-agregar:hover {
-    background-color: #0056b3;
+    background-color: #FF8731; /* Naranja queso */
 }

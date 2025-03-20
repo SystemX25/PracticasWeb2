@@ -31,10 +31,7 @@ export class InventarioComponent {
       id: this.nuevoProducto.id,
       nombre: this.nuevoProducto.nombre,
       precio: this.nuevoProducto.precio,
-      imagen: this.nuevoProducto.imagen 
-      ? `asset/images/${this.nuevoProducto.imagen}`
-      : 'asset/images/noimagen.png' // Imagen por defecto
-      
+      imagen: this.nuevoProducto.imagen || `asset\noimagen.jpg`, // Imagen por defecto  
     };
 
     this.inventarioService.agregarProducto(nuevoProducto);
