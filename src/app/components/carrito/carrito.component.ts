@@ -1,25 +1,26 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { CarritoService } from '../../services/carrito.service.ts.service';
 
 @Component({
   selector: 'app-carrito',
+  standalone: true,
   imports: [CommonModule],
-  templateUrl: './carrito.component.html',
-  styleUrl: './carrito.component.css'
+  templateUrl: './carrito.component.html'
 })
 export class CarritoComponent {
   carrito: any[] = [];
-  constructor(private carritoService: CarritoService) { }
-  ngOnInit(): void {
-    this.carrito = this.carritoService.obtenerProductos();
-  }
-  generarXML(){
-    return this.carritoService.generarXML();
+  constructor(private carritoService: CarritoService){}
+  ngOnInit() {
+    this.carrito = this.carritoService.obtenerCarrito();
   }
 
-  eliminarProducto(index: number): void {
+  generarXML() {
+    this.carritoService.generarXML();
+  }
+
+  eliminarProducto(index: number) {
     this.carritoService.eliminarProducto(index);
-    this.carrito = this.carritoService.obtenerProductos();  
+    this.carrito = this.carritoService.obtenerCarrito();
   }
 }

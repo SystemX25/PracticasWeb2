@@ -1,0 +1,91 @@
+<div class="inventario-container">
+  <!-- Botón para navegar a productos -->
+  <button class="btn-nav" (click)="irAProductos()">Ir a Productos</button>
+  <h2 class="titulo">Gestión de Inventario</h2>
+
+  <!-- Lista de productos -->
+  <div class="productos-lista">
+    <h3>Productos Actuales</h3>
+    <div *ngIf="productos.length > 0" class="productos-table">
+      <div class="table-header">
+        <span>ID</span>
+        <span>Nombre</span>
+        <span>Imagen</span>
+        <span>Precio</span>
+        <span>Cantidad</span>
+        <span>Acciones</span>
+      </div>
+      <div *ngFor="let producto of productos" class="table-row">
+        <span>{{ producto.id }}</span>
+        <span>{{ producto.nombre }}</span>
+        <span><img *ngIf="producto.imagen" [src]="producto.imagen" alt="Imagen de {{ producto.nombre }}" class="producto-thumbnail"></span>
+        <span>${{ producto.precio }}</span>
+        <span>{{ producto.cantidad }}</span>
+        <span>
+          <button (click)="seleccionarProducto(producto)" class="btn-editar">Editar</button>
+          <button (click)="eliminarProducto(producto.id)" class="btn-eliminar">Eliminar</button>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="productos.length === 0" class="sin-productos">
+      <p>No hay productos disponibles.</p>
+    </div>
+  </div>
+
+  <!-- Formulario de edición -->
+  <div *ngIf="modoEdicion && productoSeleccionado" class="formulario-edicion">
+    <h3 class="form-titulo">Editar Producto</h3>
+    <form (ngSubmit)="actualizarProducto()">
+      <div class="form-group">
+        <label for="edit-nombre">Nombre:</label>
+        <input type="text" id="edit-nombre" [(ngModel)]="productoSeleccionado.nombre" name="nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-precio">Precio:</label>
+        <input type="number" id="edit-precio" [(ngModel)]="productoSeleccionado.precio" name="precio" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-cantidad">Cantidad:</label>
+        <input type="number" id="edit-cantidad" [(ngModel)]="productoSeleccionado.cantidad" name="cantidad" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-imagen">Imagen (URL):</label>
+        <input type="text" id="edit-imagen" [(ngModel)]="productoSeleccionado.imagen" name="imagen">
+      </div>
+      <div class="preview" *ngIf="productoSeleccionado.imagen">
+        <img [src]="productoSeleccionado.imagen" alt="Vista previa de {{ productoSeleccionado.nombre }}">
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-guardar">Guardar Cambios</button>
+        <button type="button" (click)="cancelarEdicion()" class="btn-cancelar">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Formulario para agregar producto -->
+  <div class="formulario-agregar">
+    <h3 class="form-titulo">Agregar Nuevo Producto</h3>
+    <form (ngSubmit)="agregarProducto()">
+      <div class="form-group">
+        <label for="new-nombre">Nombre:</label>
+        <input type="text" id="new-nombre" [(ngModel)]="nuevoProducto.nombre" name="nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="new-precio">Precio:</label>
+        <input type="number" id="new-precio" [(ngModel)]="nuevoProducto.precio" name="precio" required>
+      </div>
+      <div class="form-group">
+        <label for="new-cantidad">Cantidad:</label>
+        <input type="number" id="new-cantidad" [(ngModel)]="nuevoProducto.cantidad" name="cantidad" required>
+      </div>
+      <div class="form-group">
+        <label for="new-imagen">Imagen (URL):</label>
+        <input type="text" id="new-imagen" [(ngModel)]="nuevoProducto.imagen" name="imagen">
+      </div>
+      <div class="preview" *ngIf="nuevoProducto.imagen">
+        <img [src]="nuevoProducto.imagen" alt="Vista previa de {{ nuevoProducto.nombre }}">
+      </div>
+      <button type="submit" class="btn-agregar">Agregar Producto</button>
+    </form>
+  </div>
+</div>

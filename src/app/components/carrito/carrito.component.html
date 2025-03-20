@@ -1,14 +1,21 @@
-<h2>Carrito de Compras</h2>
-<div class="Productos">
-    <ul>
-        <li *ngFor="let producto of carrito; let i = index">
-            {{producto.nombre}} - {{producto.precio}}
-            <button (click)="eliminarProducto(i)">Eliminar</button>
-        </li>
-    </ul>
-    <button (click)="generarXML()"> Pagar </button>
-</div>
-<p *ngIf="carrito.length === 0">
-    No hay productos en el carrito
-</p>
+<div>
+    <h2>Carrito</h2>
+    @if (carrito.length > 0) {
+        <ul>
+            @for (producto of carrito; track producto.id) {
+            <li>
+                {{producto.nombre}} - {{producto.precio}}
 
+                <button (click) = "eliminarProducto($index)">Eliminar</button>
+            </li>
+            }
+        </ul>
+        <button (click) = "generarXML()">
+            Pagar
+        </button>
+    }
+
+    @if (carrito.length === 0) {
+        <p>El carrito esta vacio</p>
+    }
+</div>
