@@ -88,7 +88,6 @@
     background-color: #f10d0d;
     border: none;
     color: white;
-    margin-left: 100px;
     margin-right: 5px;
     padding: 0.5rem 1rem;
     border-radius: 12px;
@@ -98,5 +97,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .mover{
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre botones */
+    margin-left: auto; 
   }
   

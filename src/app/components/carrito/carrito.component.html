@@ -11,7 +11,7 @@
             <span class="producto-precio">$ {{ producto.precioTotal.toFixed(2) }}</span>
           </div>
         </div>
-        <div>
+        <div class="mover">
           <button class="boton-eliminar" (click)="eliminarProducto(producto.id)">-</button>
           <span class="producto-nombre">x{{ producto.cantidad }}</span>
           <button class="boton-agregar" (click)="agregarProducto(producto)">+</button>
