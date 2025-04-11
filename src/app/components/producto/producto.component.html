@@ -6,7 +6,7 @@
 </div>
 <h2>Catalago de Productos</h2>
 <div class = "productos">
-    <div *ngFor = "let producto of productos | async" class="producto">
+    <div *ngFor = "let producto of productos" class="producto">
         <img [src]="producto.imagen" alt="imagen del prodycto"/>
         <h3>{{producto.nombre}}</h3>
         <p>Precio: ${{producto.precio}}</p>

@@ -2,32 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../services/producto.service';
 import { CommonModule } from '@angular/common';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { CarritoService } from '../../services/carrito.service';
-import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-producto',//identificador de la etiqueta de mi componente 
+  selector: 'app-producto', // Identificador de la etiqueta de tu componente
   imports: [CommonModule],
-  templateUrl: './producto.component.html',//asignamos la vista del componente
-  styleUrl: './producto.component.css'//corchetes mas de una hoja de estilos
+  templateUrl: './producto.component.html',
+  styleUrl: './producto.component.css'
 })
 export class ProductoComponent implements OnInit {
-  productos! : Observable<Producto[]>;
-  constructor(private productosService : ProductoService, private carritoService : CarritoService, private router : Router) { }
+  productos: Producto[] = [];
+
+  constructor(
+    private productosService: ProductoService,
+    private carritoService: CarritoService,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
-      this.productos = this.productosService.obtenerProductos();
+    this.productosService.obtenerProductos().subscribe((data: Producto[]) => {
+      this.productos = data;
+    });
   }
 
-  agregarAlCarrito(producto: any){
+  agregarAlCarrito(producto: Producto): void {
     this.carritoService.agregarProducto(producto);
   }
 
-  irAlCarrito(){
+  irAlCarrito(): void {
     this.router.navigate(['/carrito']);
   }
 
-  irInventario(){
+  irInventario(): void {
     this.router.navigate(['inventario']);
   }
-} 
+}
