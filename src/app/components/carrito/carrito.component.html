@@ -5,7 +5,7 @@
     <ul class="producto-lista">
       <li *ngFor="let producto of carritoAgrupado">
         <div class="producto-info">
-          <img [src]="producto.imagen" alt="Producto" class="producto-imagen" />
+          <img [src]="producto.imagen" alt="{{producto.nombre}}" class="producto-imagen" />
           <div class="producto-detalles">
             <span class="producto-nombre">{{ producto.nombre }}</span>
             <span class="producto-precio">$ {{ producto.precioTotal.toFixed(2) }}</span>
@@ -13,16 +13,33 @@
         </div>
         <div class="mover">
           <button class="boton-eliminar" (click)="eliminarProducto(producto.id)">-</button>
-          <span class="producto-nombre">x{{ producto.cantidad }}</span>
+          <span class="producto-cantidad">x{{ producto.cantidad }}</span>
           <button class="boton-agregar" (click)="agregarProducto(producto)">+</button>
         </div>
       </li>
     </ul>
+
+    <div class="totales">
+      <div class="total-linea">
+        <span>Subtotal:</span>
+        <span>$ {{ calcularSubtotal().toFixed(2) }}</span>
+      </div>
+      <div class="total-linea">
+        <span>IVA (16%):</span>
+        <span>$ {{ calcularIVA().toFixed(2) }}</span>
+      </div>
+      <div class="total-linea total">
+        <span>Total:</span>
+        <span>$ {{ calcularTotal().toFixed(2) }}</span>
+      </div>
+    </div>
+
     <button class="boton boton-generar" (click)="generarXML()">📄 Generar XML</button>
+    
+    <div id="paypal-button-container" class="paypal-container"></div>
   </div>
 
   <p class="carrito-vacio" *ngIf="carritoAgrupado.length === 0">
     El carrito está vacío
   </p>
-  
 </div>

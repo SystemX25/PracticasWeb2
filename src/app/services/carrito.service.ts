@@ -1,21 +1,32 @@
 import { Injectable } from '@angular/core';
-import {Producto} from '../models/producto';
+import { Producto } from '../models/producto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoService {
- 
-  private  carrito: Producto[] = [];
-  agregarProducto(producto: Producto){
+  private carrito: Producto[] = [];
+
+  agregarProducto(producto: Producto): void {
     this.carrito.push(producto);
   }
 
-  obtenerProducto(){
-    return this.carrito;
+  obtenerProducto(): Producto[] {
+    return [...this.carrito];
   }
-  
-  generarXML() : string{
+
+  eliminarProducto(id: number): void {
+    const index = this.carrito.findIndex(producto => producto.id === id);
+    if (index !== -1) {
+      this.carrito.splice(index, 1);
+    }
+  }
+
+  limpiarCarrito(): void {
+    this.carrito = [];
+  }
+
+  generarXML(): string {
     let subtotal = 0;
     let iva = 0;
     let total = 0;
@@ -23,8 +34,6 @@ export class CarritoService {
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <factura>
     <productos>`;
-
-    // Agrupar productos por ID para obtener la cantidad de cada uno
 
     let productosAgrupados: { [key: string]: { descripcion: string, precioUnitario: number, cantidad: number } } = {};
     
@@ -42,7 +51,7 @@ export class CarritoService {
         }
     });
 
-    iva = subtotal * 0.16; // Suponiendo un IVA del 16%
+    iva = subtotal * 0.16;
     total = subtotal + iva;
 
     Object.keys(productosAgrupados).forEach((id) => {
@@ -69,25 +78,19 @@ export class CarritoService {
     </totales>
 </factura>`;
 
-    const blob = new Blob([xml], {type:'application/xml'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = "factura.xml";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
+    this.descargarArchivo(xml, "factura.xml");
     return xml;
   }
 
-  eliminarProducto(id: number) {
-    const index = this.carrito.findIndex(producto => producto.id === id);
-    if (index !== -1) {
-      this.carrito.splice(index, 1);
-    }
+  private descargarArchivo(contenido: string, nombreArchivo: string): void {
+    const blob = new Blob([contenido], {type: 'application/xml'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nombreArchivo;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   }
-
- 
-  
 }
