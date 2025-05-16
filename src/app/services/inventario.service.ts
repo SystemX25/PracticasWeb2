@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Producto } from '../models/producto';
 import { ProductoService } from '../services/producto.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,16 @@ export class InventarioService {
     this.cargarProductos();
   }
 
-  cargarProductos() {
-    this.productoService.obtenerProductos().subscribe(productos => {
-      this.productosSubject.next(productos);
+  private cargarProductos() {
+    this.productoService.obtenerProductos().subscribe({
+      next: (productos) => {
+        const productosConImagen = productos.map(p => ({
+          ...p,
+          imagen: p.imagen || 'assets/noimagen.jpg'
+        }));
+         this.productosSubject.next(productosConImagen);
+      },
+      error: (err) => console.error('Error al cargar productos', err)
     });
   }
 
@@ -25,20 +32,26 @@ export class InventarioService {
   }
 
   agregarProducto(producto: Producto) {
-    const nuevosProductos = [...this.getProductos(), producto];
-    this.productosSubject.next(nuevosProductos);
-    this.generarXML();
+    this.productoService.agregarProducto(producto).pipe(
+      tap(() => this.cargarProductos())
+    ).subscribe({
+      next: () => console.log('Producto agregado'),
+      error: (err) => console.error('Error al agregar producto', err)
+    });
   }
 
   eliminarProducto(id: number) {
-    const nuevosProductos = this.getProductos().filter(p => p.id !== id);
-    this.productosSubject.next(nuevosProductos);
-    this.generarXML();
+    this.productoService.eliminarProducto(id).pipe(
+      tap(() => this.cargarProductos())
+    ).subscribe({
+      next: () => console.log('Producto eliminado'),
+      error: (err) => console.error('Error al eliminar producto', err)
+    });
   }
 
   generarXML() {
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<inventario>\n`;
-    this.getProductos().forEach(p => {
+    this.productosSubject.getValue().forEach(p => {
       xml += `  <producto>\n`;
       xml += `    <id>${p.id}</id>\n`;
       xml += `    <nombre>${p.nombre}</nombre>\n`;
@@ -55,8 +68,6 @@ export class InventarioService {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
-    localStorage.setItem('inventarioXML', xml);
   }
 
 }

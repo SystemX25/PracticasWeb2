@@ -2,9 +2,6 @@
 <div class="formato">
     <!-- Formulario para agregar un nuevo producto -->
   <form (submit)="agregarProducto()" class="formulario">
-    <label for="idPro">Id del producto</label>
-    <input type="number" id="idPro" [(ngModel)]="nuevoProducto.id" name="id" required />
-
     <label for="nombrePro">Nombre:</label>
     <input type="text" id="nombrePro" [(ngModel)]="nuevoProducto.nombre" name="nombre" required />
 
@@ -31,16 +28,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let producto of productos$ | async">
-            <td>{{ producto.id }}</td>
-            <td>{{ producto.nombre }}</td>
-            <td>{{ producto.precio | currency }}</td>
-            <td>
-              <img [src]="producto.imagen" alt="Imagen del producto" class="img-producto">
-            </td>
-            <td>
-              <button class="btn btn-eliminar" (click)="eliminarProducto(producto.id)">Eliminar</button>
-            </td>
+          <tr *ngFor="let producto of (inventarioService.productos$ | async)">
+              <td>{{ producto.id }}</td>
+              <td>{{ producto.nombre }}</td>
+              <td>{{ producto.precio | currency }}</td>
+              <td>
+                  <img [src]="producto.imagen" alt="Imagen del producto" class="img-producto" 
+                      onerror="this.src='assets/noimagen.jpg'">
+              </td>
+              <td>
+                  <button class="btn btn-eliminar" (click)="eliminarProducto(producto.id)">Eliminar</button>
+              </td>
           </tr>
         </tbody>
       </table>
