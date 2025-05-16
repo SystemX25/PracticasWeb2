@@ -3,13 +3,24 @@ const router = express.Router();
 const db = require('../api/db.js');
 
 // Obtener todos los productos
+// Obtener todos los productos
 router.get('/', (req, res) => {
-    db.query('SELECT * FROM productos', (err, rows) => {
+    db.query('SELECT id, nombre, precio, imagen, stock FROM productos', (err, rows) => {
         if(err) {
             console.error(err);
             return res.status(500).json({ error: 'Error al obtener productos' });
         }
-        res.json(rows);
+        
+        // Asegurarse de devolver los datos en el formato correcto
+        const productos = rows.map(row => ({
+            id: row.id,
+            nombre: row.nombre,
+            precio: row.precio,
+            imagen: row.imagen || 'assets/noimagen.jpg',
+            stock: row.stock
+        }));
+        
+        res.json(productos);
     });
 });
 

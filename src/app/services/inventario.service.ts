@@ -16,7 +16,13 @@ export class InventarioService {
 
   private cargarProductos() {
     this.productoService.obtenerProductos().subscribe({
-      next: (productos) => this.productosSubject.next(productos),
+      next: (productos) => {
+        const productosConImagen = productos.map(p => ({
+          ...p,
+          imagen: p.imagen || 'assets/noimagen.jpg'
+        }));
+         this.productosSubject.next(productosConImagen);
+      },
       error: (err) => console.error('Error al cargar productos', err)
     });
   }
