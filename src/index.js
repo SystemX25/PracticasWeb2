@@ -24,7 +24,7 @@
     app.listen(PORT, () => {
         console.log(`Servidor corriendo en http://localhost:${PORT}`);
     });
-=======
+
     const userRouter = require('./app/routes/user.js');
     app.use('/api/user', userRouter);
 
