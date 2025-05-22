@@ -32,6 +32,10 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cleanUpPayPal();
   }
 
+  generarXML(): void {
+    this.carritoService.generarXML();
+  }
+
   private cleanUpPayPal(): void {
     const container = document.getElementById('paypal-button-container');
     if (container) {
@@ -119,11 +123,14 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
           const payerName = details.payer?.name?.given_name || 'cliente';
           
           // Limpiar el carrito después de pago exitoso
-          this.carritoService.limpiarCarrito();
+         
           this.carritoAgrupado = [];
           this.cleanUpPayPal();
           
           alert(`¡Pago completado por ${payerName}! Gracias por tu compra.`);
+
+          this.generarXML();
+           this.carritoService.limpiarCarrito();
         } catch (err) {
           console.error("Error al capturar el pago:", err);
           alert('Ocurrió un error al confirmar el pago. Por favor intenta nuevamente.');
@@ -138,6 +145,7 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
+    
     this.paypalButtons.render('#paypal-button-container-fresh')
       .catch((err: any) => {
         console.error("Error al renderizar botones PayPal:", err);
@@ -198,10 +206,6 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
       quantity: producto.cantidad.toString(),
       sku: producto.id.toString().substring(0, 127)
     }));
-  }
-
-  generarXML(): void {
-    this.carritoService.generarXML();
   }
 
   eliminarProducto(id: number): void {
