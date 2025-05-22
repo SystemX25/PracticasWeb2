@@ -12,6 +12,8 @@
 
     const productosRouter = require('./app/routes/productos.js');
     app.use('/api/productos', productosRouter);
+    const usuariosRouter = require('./app/routes/user.js');
+    app.use('/api/user', usuariosRouter);
     app.listen(3000, () => {
         console.log('Servidor corriendo en http://localhost:3000');
     });

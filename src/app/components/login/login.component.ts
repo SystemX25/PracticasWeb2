@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { AuthService } from '../../services/auth.service'
 import { HttpClient, HttpClientModule  } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, HttpClientModule], // 👈 aquí van los módulos necesarios
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule], // 👈 aquí van los módulos necesarios
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

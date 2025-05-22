@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://tuservidor.com/api/login'; // Cambia esto
+  private apiUrl = 'http://localhost:3000/api/login'; // Cambia esto
 
   constructor(private http: HttpClient) {}
 
