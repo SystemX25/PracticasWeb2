@@ -1,5 +1,12 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-  <input formControlName="email" type="email" placeholder="Correo" required>
-  <input formControlName="password" type="password" placeholder="Contraseña" required>
-  <button type="submit">Iniciar Sesión</button>
-</form>
+<div class="login-container">
+  <h2>Iniciar Sesión</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <input formControlName="nombre" type="text" placeholder="nombre de usuario" required />
+    <input formControlName="password" type="password" placeholder="Contraseña" required />
+    
+    <button type="submit">Entrar</button>
+  </form>
+
+  <p class="error" *ngIf="loginError">Credenciales incorrectas</p>
+</div>
