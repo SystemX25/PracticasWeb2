@@ -1,0 +1,21 @@
+<div style="max-width: 400px; margin: auto; padding: 20px;">
+  <h2>Recuperar contraseña</h2>
+
+  <form (submit)="recuperarContrasena(); $event.preventDefault()">
+    <div style="margin-bottom: 10px;">
+      <label for="nombre">Nombre de usuario:</label><br />
+      <input
+        id="nombre"
+        name="nombre"
+        type="text"
+        [(ngModel)]="nombre"
+        required
+        style="width: 100%; padding: 8px;"
+      />
+    </div>
+
+    <button type="submit" style="padding: 10px 20px;">Recuperar</button>
+  </form>
+
+  <p style="margin-top: 15px; color: blue;">{{ mensaje }}</p>
+</div>

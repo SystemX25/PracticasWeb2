@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
   });
 });
 
+<<<<<<< Updated upstream
 router.post('/register', (req, res) => {
   const { nombre, email, password } = req.body;
   
@@ -62,6 +63,30 @@ router.post('/register', (req, res) => {
         userId: result.insertId 
       });
     });
+=======
+// Recuperar contraseña
+router.post('/recuperar', (req, res) => {
+  const { nombre } = req.body;
+
+  if (!nombre) {
+    return res.status(400).json({ error: 'Falta el nombre de usuario' });
+  }
+
+  const sql = 'SELECT password FROM usuarios WHERE nombre = ?';
+  db.query(sql, [nombre], (err, results) => {
+    if (err) {
+      console.error('Error al recuperar contraseña:', err);
+      return res.status(500).json({ error: 'Error del servidor' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // ⚠️ OPCIÓN TEMPORAL: Enviar contraseña directamente (solo para pruebas)
+    const contrasena = results[0].password;
+    res.json({ mensaje: `Tu contraseña es: ${contrasena}` });
+>>>>>>> Stashed changes
   });
 });
 
