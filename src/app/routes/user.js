@@ -32,4 +32,37 @@ router.get('/', (req, res) => {
   });
 });
 
+router.post('/register', (req, res) => {
+  const { nombre, email, password } = req.body;
+  
+  if (!nombre || !email || !password) {
+    return res.status(400).json({ error: 'Todos los campos son requeridos' });
+  }
+
+  db.query('SELECT * FROM usuarios WHERE correo = ?', [correo], (err, results) => {
+    if (err) {
+      console.error('Error al verificar usuario:', err);
+      return res.status(500).json({ error: 'Error del servidor' });
+    }
+    
+    if (results.length > 0) {
+      return res.status(409).json({ error: 'El email ya está registrado' });
+    }
+
+    const insertSql = 'INSERT INTO usuarios (nombre, correo, password) VALUES (?, ?, ?)';
+    db.query(insertSql, [nombre, correo, password], (err, result) => {
+      if (err) {
+        console.error('Error al registrar usuario:', err);
+        return res.status(500).json({ error: 'Error al registrar usuario' });
+      }
+      
+      res.json({ 
+        success: true, 
+        message: 'Registro exitoso',
+        userId: result.insertId 
+      });
+    });
+  });
+});
+
 module.exports = router;
