@@ -1,21 +1,52 @@
-<div style="max-width: 400px; margin: auto; padding: 20px;">
-  <h2>Recuperar contraseña</h2>
+<div style="max-width: 400px; margin: 2rem auto; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 12px; background: white; font-family: Arial, sans-serif;">
+  <h2 style="text-align: center; color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.5rem;">Recuperar Contraseña</h2>
 
-  <form (submit)="recuperarContrasena(); $event.preventDefault()">
-    <div style="margin-bottom: 10px;">
-      <label for="nombre">Nombre de usuario:</label><br />
+  <form (ngSubmit)="recuperarContrasena()" style="margin-bottom: 1.5rem;">
+    <div style="margin-bottom: 1.25rem;">
+      <label for="nombre" style="display: block; margin-bottom: 0.5rem; color: #34495e; font-weight: 600;">Nombre de usuario:</label>
       <input
         id="nombre"
         name="nombre"
         type="text"
         [(ngModel)]="nombre"
         required
-        style="width: 100%; padding: 8px;"
-      />
+        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; transition: border-color 0.3s;"
+        [style.border-color]="nombre ? '#3498db' : '#ddd'"
+      >
     </div>
 
-    <button type="submit" style="padding: 10px 20px;">Recuperar</button>
+    <div style="margin-bottom: 1.5rem;">
+      <label for="correo" style="display: block; margin-bottom: 0.5rem; color: #34495e; font-weight: 600;">Correo electrónico:</label>
+      <input
+        id="correo"
+        name="correo_electronico"
+        type="email"
+        [(ngModel)]="correo_electronico"
+        required
+        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; transition: border-color 0.3s;"
+        [style.border-color]="correo_electronico ? '#3498db' : '#ddd'"
+      >
+    </div>
+
+    <button 
+      type="submit" 
+      style="width: 100%; padding: 0.75rem; background-color: #3498db; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s;"
+      [disabled]="!nombre || !correo_electronico || isLoading"
+      [style.background-color]="(!nombre || !correo_electronico || isLoading) ? '#95a5a6' : '#3498db'"
+    >
+      {{ isLoading ? 'Procesando...' : 'Recuperar Contraseña' }}
+    </button>
   </form>
 
-  <p style="margin-top: 15px; color: blue;">{{ mensaje }}</p>
+  <div *ngIf="mensaje" 
+       style="margin: 1.5rem 0; padding: 1rem; background-color: #f8f9fa; border-radius: 6px; color: #2c3e50; text-align: center; border-left: 4px solid #3498db;">
+    {{ mensaje }}
+  </div>
+
+  <div style="text-align: center; margin-top: 1.5rem;">
+    <a routerLink="/" 
+       style="color: #3498db; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+      <span style="font-size: 1.2rem;">←</span> Volver al Login
+    </a>
+  </div>
 </div>

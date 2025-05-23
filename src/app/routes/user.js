@@ -2,23 +2,24 @@ const express = require('express');
 const router = express.Router();
 const db = require('../api/db.js');
 
-//Obtener todos los productos
+// Obtener todos los productos
 // Ruta GET para buscar productos (con o sin filtro por nombre)
 router.get('/', (req, res) => {
   const { nombre, password } = req.query;
-    console.log('Nombre:', nombre);
-    console.log("password", password)
+  console.log('Nombre:', nombre);
+  console.log("password", password);
+  
   let sql = 'SELECT * FROM usuarios';
   let params = [];
 
   if (!nombre || !password) {
     return res.status(500).json({ error: 'Error del servidor' });
-    }
+  }
 
-    sql += ' WHERE nombre = ? AND password = ?';
-    params.push(nombre);  
-    params.push(password);
-    //console.log(sql);
+  sql += ' WHERE nombre = ? AND password = ?';
+  params.push(nombre);  
+  params.push(password);
+  
   db.query(sql, params, (err, results) => {
     if (err) {
       console.error('Error al buscar productos:', err);
@@ -32,7 +33,6 @@ router.get('/', (req, res) => {
   });
 });
 
-<<<<<<< Updated upstream
 router.post('/register', (req, res) => {
   const { nombre, email, password } = req.body;
   
@@ -40,7 +40,7 @@ router.post('/register', (req, res) => {
     return res.status(400).json({ error: 'Todos los campos son requeridos' });
   }
 
-  db.query('SELECT * FROM usuarios WHERE correo = ?', [correo], (err, results) => {
+  db.query('SELECT * FROM usuarios WHERE correo = ?', [email], (err, results) => {
     if (err) {
       console.error('Error al verificar usuario:', err);
       return res.status(500).json({ error: 'Error del servidor' });
@@ -51,7 +51,7 @@ router.post('/register', (req, res) => {
     }
 
     const insertSql = 'INSERT INTO usuarios (nombre, correo, password) VALUES (?, ?, ?)';
-    db.query(insertSql, [nombre, correo, password], (err, result) => {
+    db.query(insertSql, [nombre, email, password], (err, result) => {
       if (err) {
         console.error('Error al registrar usuario:', err);
         return res.status(500).json({ error: 'Error al registrar usuario' });
@@ -63,30 +63,41 @@ router.post('/register', (req, res) => {
         userId: result.insertId 
       });
     });
-=======
-// Recuperar contraseña
-router.post('/recuperar', (req, res) => {
-  const { nombre } = req.body;
+  }); // Esta era la llave que faltaba
+});
 
-  if (!nombre) {
-    return res.status(400).json({ error: 'Falta el nombre de usuario' });
+// Recuperar contraseña (versión mejorada)
+router.post('/recuperar', (req, res) => {
+  const { nombre, correo_electronico } = req.body;
+
+  if (!nombre || !correo_electronico) {
+    return res.status(400).json({ 
+      error: 'Se requieren tanto el nombre como el correo electrónico' 
+    });
   }
 
-  const sql = 'SELECT password FROM usuarios WHERE nombre = ?';
-  db.query(sql, [nombre], (err, results) => {
+  const sql = 'SELECT password FROM usuarios WHERE nombre = ? AND correo_electronico = ?';
+  
+  db.query(sql, [nombre, correo_electronico], (err, results) => {
     if (err) {
       console.error('Error al recuperar contraseña:', err);
       return res.status(500).json({ error: 'Error del servidor' });
     }
 
     if (results.length === 0) {
-      return res.status(404).json({ error: 'Usuario no encontrado' });
+      return res.status(404).json({ 
+        error: 'No se encontró usuario con esas credenciales' 
+      });
     }
 
     // ⚠️ OPCIÓN TEMPORAL: Enviar contraseña directamente (solo para pruebas)
+    // En producción, deberías implementar un sistema de recuperación seguro
+    // con tokens temporales y envío por email
     const contrasena = results[0].password;
-    res.json({ mensaje: `Tu contraseña es: ${contrasena}` });
->>>>>>> Stashed changes
+    res.json({ 
+      mensaje: `Tu contraseña es: ${contrasena}`,
+      advertencia: 'Este es un método inseguro, solo para desarrollo' 
+    });
   });
 });
 
