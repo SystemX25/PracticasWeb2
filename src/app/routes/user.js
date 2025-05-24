@@ -4,14 +4,15 @@ const db = require('../api/db.js');
 
 router.get('/', (req, res) => {
   const { nombre, password } = req.query;
-    console.log('Nombre:', nombre);
-    console.log("password", password)
+  console.log('Nombre:', nombre);
+  console.log("password", password);
+  
   let sql = 'SELECT * FROM usuarios';
   let params = [];
 
   if (!nombre || !password) {
     return res.status(500).json({ error: 'Error del servidor' });
-    }
+  }
 
     sql += ' WHERE nombre = ? AND password = ?';
     params.push(nombre);  
@@ -48,6 +49,7 @@ router.post('/register', (req, res) => {
     }
 
     const insertSql = 'INSERT INTO usuarios (nombre, correo, password) VALUES (?, ?, ?)';
+
     db.query(insertSql, [name, email, password], (err, result) => {
       if (err) {
         console.error('Error al registrar usuario:', err);
@@ -63,6 +65,41 @@ router.post('/register', (req, res) => {
         message: 'Registro exitoso',
         userId: result.insertId 
       });
+    });
+  }); // Esta era la llave que faltaba
+});
+
+// Recuperar contraseña (versión mejorada)
+router.post('/recuperar', (req, res) => {
+  const { nombre, correo_electronico } = req.body;
+
+  if (!nombre || !correo_electronico) {
+    return res.status(400).json({ 
+      error: 'Se requieren tanto el nombre como el correo electrónico' 
+    });
+  }
+
+  const sql = 'SELECT password FROM usuarios WHERE nombre = ? AND correo_electronico = ?';
+  
+  db.query(sql, [nombre, correo_electronico], (err, results) => {
+    if (err) {
+      console.error('Error al recuperar contraseña:', err);
+      return res.status(500).json({ error: 'Error del servidor' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ 
+        error: 'No se encontró usuario con esas credenciales' 
+      });
+    }
+
+    // ⚠️ OPCIÓN TEMPORAL: Enviar contraseña directamente (solo para pruebas)
+    // En producción, deberías implementar un sistema de recuperación seguro
+    // con tokens temporales y envío por email
+    const contrasena = results[0].password;
+    res.json({ 
+      mensaje: `Tu contraseña es: ${contrasena}`,
+      advertencia: 'Este es un método inseguro, solo para desarrollo' 
     });
   });
 });
