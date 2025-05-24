@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../api/db.js');
 
-//Obtener todos los productos
-// Ruta GET para buscar productos (con o sin filtro por nombre)
 router.get('/', (req, res) => {
   const { nombre, password } = req.query;
     console.log('Nombre:', nombre);
@@ -18,7 +16,7 @@ router.get('/', (req, res) => {
     sql += ' WHERE nombre = ? AND password = ?';
     params.push(nombre);  
     params.push(password);
-    //console.log(sql);
+
   db.query(sql, params, (err, results) => {
     if (err) {
       console.error('Error al buscar productos:', err);
@@ -33,13 +31,13 @@ router.get('/', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  const { nombre, email, password } = req.body;
+  const { name, email, password } = req.body;
   
-  if (!nombre || !email || !password) {
+   if (!name || !email || !password) {
     return res.status(400).json({ error: 'Todos los campos son requeridos' });
   }
 
-  db.query('SELECT * FROM usuarios WHERE correo = ?', [correo], (err, results) => {
+  db.query('SELECT * FROM usuarios WHERE correo = ?', [email], (err, results) => {
     if (err) {
       console.error('Error al verificar usuario:', err);
       return res.status(500).json({ error: 'Error del servidor' });
@@ -50,12 +48,16 @@ router.post('/register', (req, res) => {
     }
 
     const insertSql = 'INSERT INTO usuarios (nombre, correo, password) VALUES (?, ?, ?)';
-    db.query(insertSql, [nombre, correo, password], (err, result) => {
+    db.query(insertSql, [name, email, password], (err, result) => {
       if (err) {
         console.error('Error al registrar usuario:', err);
         return res.status(500).json({ error: 'Error al registrar usuario' });
       }
       
+      res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+      res.header('Access-Control-Allow-Methods', 'POST');
+      res.header('Access-Control-Allow-Headers', 'Content-Type');
+
       res.json({ 
         success: true, 
         message: 'Registro exitoso',
