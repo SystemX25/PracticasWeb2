@@ -16,11 +16,13 @@ export class AuthService {
     });
   }
 
-  register(nombre: string, correo: string, password: string): Observable<any> {
+  register(name: string, email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, {
-      nombre,
-      correo,
+      name,
+      email,
       password
+    }, {
+      headers: { 'Content-Type': 'application/json' }  // ¡Importante!
     });
-}
+  }
 }
