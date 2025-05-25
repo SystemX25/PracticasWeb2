@@ -28,7 +28,7 @@ export class LoginComponent {
   onSubmit() {
   if (this.loginForm.valid) {
     const { nombre, password } = this.loginForm.value;
-
+    console.log(nombre + password);
     this.http.get<any>(`http://localhost:3000/api/user`, {
       params: {
         nombre: nombre,        
@@ -37,6 +37,8 @@ export class LoginComponent {
     }).subscribe({
       next: (res) => {
         console.log('Login exitoso:', res);
+        //alert('Login exitoso');
+        localStorage.setItem('usuario', JSON.stringify(res.usuario));
         this.router.navigate(['/productos']);
       },
       error: (err) => {

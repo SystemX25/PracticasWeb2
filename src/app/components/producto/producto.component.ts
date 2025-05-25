@@ -6,13 +6,14 @@ import { Router } from '@angular/router';
 import { CarritoService } from '../../services/carrito.service';
 
 @Component({
-  selector: 'app-producto', // Identificador de la etiqueta de tu componente
+  selector: 'app-producto',
   imports: [CommonModule],
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.css'
 })
 export class ProductoComponent implements OnInit {
   productos: Producto[] = [];
+  mostrarInventario: boolean = false; // <- NUEVA propiedad
 
   constructor(
     private productosService: ProductoService,
@@ -21,9 +22,21 @@ export class ProductoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Obtener productos
     this.productosService.obtenerProductos().subscribe((data: Producto[]) => {
       this.productos = data;
     });
+
+    // Verificar usuario desde localStorage
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+
+    // Ejemplo: mostrar inventario solo si el usuario tiene ID 1
+    if (usuario && usuario.id === 2) {
+      this.mostrarInventario = true;
+    }
+
+    // Otra opción: mostrar si tiene rol "admin"
+    // this.mostrarInventario = usuario?.rol === 'admin';
   }
 
   agregarAlCarrito(producto: Producto): void {
@@ -35,6 +48,6 @@ export class ProductoComponent implements OnInit {
   }
 
   irInventario(): void {
-    this.router.navigate(['inventario']);
+    this.router.navigate(['/inventario']);
   }
 }
