@@ -10,10 +10,11 @@ export class RecuperarService {
 
   constructor(private http: HttpClient) {}
 
-  recuperar(nombre: string, correo_electronico: string): Observable<any> {
+  recuperarContrasena(nombre: string, email: string): Observable<any> {
+    console.log('Enviando:', { nombre, email }); // Agrega esto
     return this.http.post<any>(this.apiUrl, { 
-      nombre, 
-      correo_electronico 
+      nombre,
+      correo_electronico: email 
     });
   }
 }
