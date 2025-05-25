@@ -21,18 +21,18 @@
         id="correo"
         name="correo_electronico"
         type="email"
-        [(ngModel)]="correo_electronico"
+        [(ngModel)]="email"
         required
         style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; transition: border-color 0.3s;"
-        [style.border-color]="correo_electronico ? '#3498db' : '#ddd'"
+        [style.border-color]="email ? '#3498db' : '#ddd'"
       >
     </div>
 
     <button 
       type="submit" 
       style="width: 100%; padding: 0.75rem; background-color: #3498db; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s;"
-      [disabled]="!nombre || !correo_electronico || isLoading"
-      [style.background-color]="(!nombre || !correo_electronico || isLoading) ? '#95a5a6' : '#3498db'"
+      [disabled]="!nombre || !email || isLoading"
+      [style.background-color]="(!nombre || !email || isLoading) ? '#95a5a6' : '#3498db'"
     >
       {{ isLoading ? 'Procesando...' : 'Recuperar Contraseña' }}
     </button>

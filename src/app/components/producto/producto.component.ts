@@ -31,7 +31,7 @@ export class ProductoComponent implements OnInit {
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
 
     // Ejemplo: mostrar inventario solo si el usuario tiene ID 1
-    if (usuario && usuario.id === 2) {
+    if (usuario && usuario.id === 1) {
       this.mostrarInventario = true;
     }
 

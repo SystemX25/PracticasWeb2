@@ -83,6 +83,8 @@
     const sql = 'SELECT password FROM usuarios WHERE nombre = ? AND correo = ?';
     
     db.query(sql, [nombre, correo_electronico], (err, results) => {
+      console.log(results);
+      console.log(err);
       if (err) {
         console.error('Error al recuperar contraseña:', err);
         return res.status(500).json({ error: 'Error del servidor' });
@@ -95,6 +97,7 @@
       }
 
       const contrasena = results[0].password;
+      console.log('Contraseña recuperada:', contrasena);
       res.json({ 
         mensaje: `Tu contraseña es: ${contrasena}`,
         advertencia: 'Este es un método inseguro, solo para desarrollo' 

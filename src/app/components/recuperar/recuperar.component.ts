@@ -54,8 +54,9 @@ export class RecuperarComponent {
     this.recuperarService.recuperarContrasena(this.nombre, this.email).subscribe({
       next: (res) => {
         this.isLoading = false;
-        if (res.success) {
-          this.mensaje = res.message;
+        console.log('Respuesta del servidor:', res);
+        if (res.mensaje) {
+          this.mensaje = res.mensaje;
           // Solo para desarrollo
           console.log('Datos de respuesta:', res.datos);
         } else {
