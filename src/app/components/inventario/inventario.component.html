@@ -1,6 +1,6 @@
 <h2 class="titulo">Gestión de Inventario 🍔</h2>
 <div class="formato">
-    <!-- Formulario para agregar un nuevo producto -->
+  <!-- Formulario para agregar un nuevo producto -->
   <form (submit)="agregarProducto()" class="formulario">
     <label for="nombrePro">Nombre:</label>
     <input type="text" id="nombrePro" [(ngModel)]="nuevoProducto.nombre" name="nombre" required />
@@ -10,6 +10,7 @@
 
     <label for="imagenPro">URL de la imagen:</label>
     <input type="text" id="imagenPro" [(ngModel)]="nuevoProducto.imagen" name="imagen" />
+
 
     <button type="submit" class="btn btn-agregar">Agregar Producto</button>
   </form>
@@ -23,22 +24,27 @@
             <th>ID</th>
             <th>Nombre</th>
             <th>Precio</th>
+            <th>Stock</th>
             <th>Imagen</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let producto of (inventarioService.productos$ | async)">
-              <td>{{ producto.id }}</td>
-              <td>{{ producto.nombre }}</td>
-              <td>{{ producto.precio | currency }}</td>
-              <td>
-                  <img [src]="producto.imagen" alt="Imagen del producto" class="img-producto" 
-                      onerror="this.src='assets/noimagen.jpg'">
-              </td>
-              <td>
-                  <button class="btn btn-eliminar" (click)="eliminarProducto(producto.id)">Eliminar</button>
-              </td>
+            <td>{{ producto.id }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.precio | currency }}</td>
+            <td><input type="number" name="stock" [(ngModel)]="producto.stock" min="0" max="100" maxlength="2" minlength="1"
+                style="background-color:antiquewhite"></td>
+            <td>
+              <img [src]="producto.imagen" alt="Imagen del producto" class="img-producto"
+                onerror="this.src='assets/noimagen.jpg'">
+            </td>
+            <td>
+              <button class="btn btn-eliminar" (click)="eliminarProducto(producto.id)">Eliminar</button>
+              <button class="btn btn-agregar"  (click)="guardarStock(producto.id, producto.stock)">Guardar Stock</button>
+
+            </td>
           </tr>
         </tbody>
       </table>

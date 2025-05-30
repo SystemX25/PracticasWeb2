@@ -49,6 +49,14 @@ export class InventarioService {
     });
   }
 
+  guardarStock(id: number, stock: number) {
+    this.productoService.guardarStock(id, stock).pipe(
+      tap(() => console.log('Stock guardado'))
+    ).subscribe({
+      next: () => console.log('Stock guardado correctamente'),
+      error: (err) => console.error('Error al guardar stock', err)
+    });
+  }
   generarXML() {
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<inventario>\n`;
     this.productosSubject.getValue().forEach(p => {

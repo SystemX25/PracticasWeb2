@@ -13,6 +13,7 @@
     <img [src]="producto.imagen" alt="imagen del producto" />
     <h3>{{ producto.nombre }}</h3>
     <p>Precio: ${{ producto.precio }}</p>
+    <p>Stock: {{producto.stock}}</p>
     <button (click)="agregarAlCarrito(producto)">Agregar al Carrito</button>
   </div>
 </div>

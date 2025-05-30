@@ -25,6 +25,10 @@ export class ProductoService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
+  guardarStock(id: number, stock: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, { stock });
+  }
+
   private obtenerDesdeXML(): Observable<any[]> {
     const xmlGuardado = localStorage.getItem('inventarioXML');
     if (xmlGuardado) {
@@ -43,6 +47,8 @@ export class ProductoService {
       );
     }
   }
+
+  
 
   private parseXML(xml: string): any[] {
     const parser = new DOMParser();

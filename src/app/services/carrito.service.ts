@@ -35,18 +35,19 @@ export class CarritoService {
 <factura>
     <productos>`;
 
-    let productosAgrupados: { [key: string]: { descripcion: string, precioUnitario: number, cantidad: number } } = {};
+    let productosAgrupados: { [key: string]: { descripcion: string, precioUnitario: number, cantidad: number, stock: Number } } = {};
     
     this.carrito.forEach((producto) => {
         subtotal += producto.precio;
 
         if (productosAgrupados[producto.id]) {
-            productosAgrupados[producto.id].cantidad++;
+            productosAgrupados[producto.id].cantidad !== productosAgrupados[producto.id].stock ? productosAgrupados[producto.id].cantidad++ : productosAgrupados[producto.id].stock;
         } else {
             productosAgrupados[producto.id] = { 
                 descripcion: producto.nombre, 
                 precioUnitario: producto.precio, 
-                cantidad: 1 
+                cantidad: 1,
+                stock: producto.stock ? producto.stock : 0
             };
         }
     });

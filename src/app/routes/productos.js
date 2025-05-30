@@ -63,4 +63,28 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const {stock} = req.body;
+
+    if( stock === undefined) {
+        return res.status(400).json({ error: 'Stock es requerido' });
+    }
+
+    const sql = 'UPDATE productos SET stock = ? WHERE id = ?';
+    db.query(sql, [stock, id], (err, result) => {
+        if(err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Error al actualizar producto' });
+        }
+        
+        if(result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+        
+        res.json({ message: 'Producto actualizado', producto: { id, stock } });
+    }); 
+}
+);
+
 module.exports = router;

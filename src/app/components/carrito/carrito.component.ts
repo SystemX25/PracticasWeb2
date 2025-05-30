@@ -158,7 +158,7 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
     
     carrito.forEach(producto => {
       if (agrupado[producto.id]) {
-        agrupado[producto.id].cantidad++;
+        agrupado[producto.id].cantidad < agrupado[producto.id].stock ? agrupado[producto.id].cantidad++ : agrupado[producto.id].cantidad = agrupado[producto.id].stock ;
         agrupado[producto.id].precioTotal = producto.precio * agrupado[producto.id].cantidad;
       } else {
         agrupado[producto.id] = { 
@@ -167,6 +167,8 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
           precioTotal: producto.precio
         };
       }
+
+      console.log(`Producto agrupado: ${producto.nombre}, Cantidad: ${agrupado[producto.id].cantidad}`);
     });
     
     this.carritoAgrupado = Object.values(agrupado);

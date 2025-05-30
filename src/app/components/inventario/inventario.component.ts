@@ -38,6 +38,16 @@ export class InventarioComponent {
     }
   }
 
+  guardarStock(id: number, stock: number | undefined) {
+    if (stock === undefined) {
+    console.error('El stock es undefined');
+    return;
+  }
+
+  // Aquí ya es seguro usar `stock` como number
+  this.inventarioService.guardarStock(id, stock);
+  }
+
   descargarXML() {
     this.inventarioService.generarXML();
   }
