@@ -1,11 +1,16 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http'; // Añade HttpHeaders al import
 import { Injectable } from '@angular/core';
 import { Producto } from '../models/producto';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoService {
   private carrito: Producto[] = [];
+  private apiUrl = 'http://localhost:3000/api'; // Ajusta según tu configuración
+
+  constructor(private http: HttpClient) {}
 
   agregarProducto(producto: Producto): void {
     this.carrito.push(producto);
@@ -93,5 +98,21 @@ export class CarritoService {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  }
+
+ actualizarStock(productos: {id: number, cantidadComprada: number}[]): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    
+    const productosParaEnviar = productos.map(p => ({
+        id: Number(p.id),
+        cantidadComprada: Number(p.cantidadComprada)
+    }));
+
+    console.log('Enviando datos para actualizar stock:', productosParaEnviar);
+    return this.http.put(`${this.apiUrl}/productos/actualizar-stock`, productosParaEnviar, httpOptions);
   }
 }

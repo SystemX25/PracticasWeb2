@@ -4,7 +4,7 @@
 
     app.use(cors({
         origin: 'http://localhost:4200', // Ajusta según tu puerto de Angular
-        methods: ['GET', 'POST', 'DELETE', 'PUT'],
+        methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
         allowedHeaders: ['Content-Type']
     }));
 

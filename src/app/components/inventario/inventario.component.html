@@ -35,7 +35,7 @@
             <td>{{ producto.nombre }}</td>
             <td>{{ producto.precio | currency }}</td>
             <td><input type="number" name="stock" [(ngModel)]="producto.stock" min="0" max="100" maxlength="2" minlength="1"
-                style="background-color:antiquewhite"></td>
+                 placeholder="Stock"></td>
             <td>
               <img [src]="producto.imagen" alt="Imagen del producto" class="img-producto"
                 onerror="this.src='assets/noimagen.jpg'">

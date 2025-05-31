@@ -121,16 +121,29 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
           
           const details = await actions.order.capture();
           const payerName = details.payer?.name?.given_name || 'cliente';
-          
-          // Limpiar el carrito después de pago exitoso
-         
-          this.carritoAgrupado = [];
-          this.cleanUpPayPal();
-          
-          alert(`¡Pago completado por ${payerName}! Gracias por tu compra.`);
 
-          this.generarXML();
-           this.carritoService.limpiarCarrito();
+          const productosParaActualizar = this.carritoAgrupado.map(producto => ({
+            id: Number(producto.id),
+            cantidadComprada: Number(producto.cantidad)
+          }));
+
+          this.carritoService.actualizarStock(productosParaActualizar).subscribe({
+            next: () => {
+              console.log('Stock actualizado correctamente');
+              
+              // Limpiar el carrito después de pago exitoso
+              this.carritoAgrupado = [];
+              this.cleanUpPayPal();
+              
+              alert(`¡Pago completado por ${payerName}! Gracias por tu compra.`);
+              this.generarXML();
+              this.carritoService.limpiarCarrito();
+            },
+            error: (err) => {
+              console.error("Error al actualizar el stock:", err);
+              alert('Pago completado pero hubo un error al actualizar el stock. Contacta al administrador.');
+            }
+          });
         } catch (err) {
           console.error("Error al capturar el pago:", err);
           alert('Ocurrió un error al confirmar el pago. Por favor intenta nuevamente.');
