@@ -2,18 +2,48 @@
 
 <div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
 
-<form (ngSubmit)="guardarCambios()">
-  <label>Nombre:
-    <input [(ngModel)]="usuario.nombre" name="nombre" required />
-  </label><br>
+<div class="perfil-container">
+  <div class="info-usuario">
+    <div class="info-item">
+      <span class="info-label">Nombre:</span>
+      <span class="info-value">{{ usuario.nombre }}</span>
+    </div>
+    
+    <div class="info-item">
+      <span class="info-label">Correo:</span>
+      <span class="info-value">{{ usuario.correo }}</span>
+    </div>
+    
+    <div class="info-item">
+      <span class="info-label">Contraseña:</span>
+      <span class="info-value">••••••••</span>
+    </div>
+  </div>
 
-  <label>Correo:
-    <input [(ngModel)]="usuario.correo" name="correo" required />
-  </label><br>
+  <div class="acciones">
+    <button class="btn-secundario" (click)="toggleEdicion()">
+      {{ editando ? 'Ocultar Edición' : 'Editar Perfil' }}
+    </button>
+  </div>
 
-  <label>Contraseña:
-    <input type="password" [(ngModel)]="usuario.password" name="password" required />
-  </label><br>
+  <div *ngIf="editando" class="formulario-edicion">
+    <form (ngSubmit)="guardarCambios()">
+      <label>Nombre:
+        <input [(ngModel)]="usuarioEditado.nombre" name="nombre" required />
+      </label>
 
-  <button type="submit">Guardar Cambios</button>
-</form>
+      <label>Correo:
+        <input [(ngModel)]="usuarioEditado.correo" name="correo" type="email" required />
+      </label>
+
+      <label>Contraseña:
+        <input type="password" [(ngModel)]="usuarioEditado.password" name="password" required />
+      </label>
+
+      <div class="botones-edicion">
+        <button type="button" class="btn-peligro" (click)="cancelarEdicion()">Cancelar</button>
+        <button type="submit" class="btn-secundario">Guardar Cambios</button>
+      </div>
+    </form>
+  </div>
+</div>

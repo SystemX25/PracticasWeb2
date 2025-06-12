@@ -1,9 +1,7 @@
-/* ESTILOS PARA PERFIL - TEMA HAMBURGUESA */
 
-/* Título de la página */
 h2 {
   text-align: center;
-  color: #8b4513; /* color-carne-cocida */
+  color: #8b4513;
   margin: 32px 0;
   font-size: 32px;
   text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.3);
@@ -17,9 +15,8 @@ h2::before {
   margin-bottom: 8px;
 }
 
-/* Contenedor del mensaje */
 .mensaje {
-  background: linear-gradient(135deg, #90ee90 0%, #32cd32 100%); /* lechuga-fresca a lechuga-iceberg */
+  background: linear-gradient(135deg, #90ee90 0%, #32cd32 100%); 
   color: #ffffff;
   padding: 16px;
   border-radius: 8px;
@@ -29,7 +26,7 @@ h2::before {
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
   animation: slideDown 0.5s ease-out;
-  border: 2px solid #228b22; /* color-lechuga-oscura */
+  border: 2px solid #228b22; 
   position: relative;
 }
 
@@ -53,28 +50,26 @@ h2::before {
   }
 }
 
-/* Contenedor principal del perfil */
 .perfil-container {
   max-width: 600px;
   margin: 40px auto;
   padding: 20px;
-  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%); /* blanco a crema */
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
-  border: 3px solid #d2b48c; /* color-pan-superior */
+  border: 3px solid #d2b48c; 
   animation: fadeIn 0.6s ease-out;
 }
 
-/* Formulario */
 form {
   max-width: 500px;
   margin: 40px auto;
   padding: 32px;
-  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%); /* blanco a crema */
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
   animation: fadeIn 0.6s ease-out;
-  border: 3px solid #d2b48c; /* color-pan-superior */
+  border: 3px solid #d2b48c; 
   position: relative;
 }
 
@@ -92,7 +87,7 @@ form::before {
 form label {
   display: block;
   margin-bottom: 20px;
-  color: #8b4513; /* color-carne-cocida */
+  color: #8b4513; 
   font-weight: 600;
   font-size: 16px;
   position: relative;
@@ -101,23 +96,23 @@ form label {
 form label::before {
   content: "🔸";
   margin-right: 8px;
-  color: #ffd700; /* color-queso-cheddar */
+  color: #ffd700; 
 }
 
 form input {
   margin-top: 8px;
   padding: 12px 16px;
-  border: 2px solid #f5f5dc; /* color-cebolla-blanca */
+  border: 2px solid #f5f5dc; 
   border-radius: 8px;
   font-size: 16px;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #ffffff 0%, #fffacd 100%); /* blanco a salsa-mayo */
+  background: linear-gradient(135deg, #ffffff 0%, #fffacd 100%); 
   width: 100%;
 }
 
 form input:focus {
   outline: none;
-  border-color: #ffd700; /* color-queso-cheddar */
+  border-color: #ffd700;
   box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
   background: #ffffff;
 }
@@ -126,9 +121,8 @@ form input[type="password"] {
   font-family: inherit;
 }
 
-/* Efectos de validación */
 form input:valid {
-  border-color: #90ee90; /* color-lechuga-fresca */
+  border-color: #90ee90; 
   background: linear-gradient(135deg, #ffffff 0%, #f0fff0 100%);
 }
 
@@ -141,14 +135,14 @@ form input:valid::after {
 }
 
 form input:invalid:not(:focus):not(:placeholder-shown) {
-  border-color: #dc143c; /* color-tomate-cherry */
+  border-color: #dc143c; 
   background: linear-gradient(135deg, #ffffff 0%, #fff0f0 100%);
 }
 
-/* Botón de guardar */
+
 form button[type="submit"] {
   width: 100%;
-  background: linear-gradient(135deg, #8b4513 0%, #654321 100%); /* carne-cocida a carne-sellada */
+  background: linear-gradient(135deg, #8b4513 0%, #654321 100%); 
   color: #ffffff;
   padding: 16px 24px;
   border: none;
@@ -165,7 +159,6 @@ form button[type="submit"] {
 }
 
 form button[type="submit"]::after {
-  content: "💾🍔";
   position: absolute;
   right: 16px;
   top: 50%;
@@ -174,7 +167,7 @@ form button[type="submit"]::after {
 }
 
 form button[type="submit"]:hover {
-  background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%); /* carne-jugosa a carne-cocida */
+  background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%); 
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
 }
@@ -184,19 +177,18 @@ form button[type="submit"]:active {
 }
 
 form button[type="submit"]:disabled {
-  background: #666666; /* color-gris */
+  background: #666666; 
   cursor: not-allowed;
   transform: none;
   opacity: 0.6;
 }
 
-/* Sección de información del usuario */
 .info-usuario {
-  background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%); /* pan-sesamo a cebolla-caramelizada */
+  background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%); 
   padding: 24px;
   border-radius: 8px;
   margin-bottom: 24px;
-  border: 2px solid #ffd700; /* color-queso-cheddar */
+  border: 2px solid #ffd700;
   position: relative;
 }
 
@@ -211,7 +203,7 @@ form button[type="submit"]:disabled {
 }
 
 .info-usuario h3 {
-  color: #8b4513; /* color-carne-cocida */
+  color: #8b4513;
   margin-bottom: 16px;
   font-size: 20px;
 }
@@ -235,7 +227,7 @@ form button[type="submit"]:disabled {
 }
 
 .info-value {
-  color: #666666; /* color-gris */
+  color: #2a1a0a;
 }
 
 /* Avatar del usuario */
@@ -435,4 +427,77 @@ form label::after {
     flex-direction: column;
     gap: 4px;
   }
+}
+
+.formulario-edicion {
+  margin-top: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+  border: 3px solid #d2b48c;
+  animation: slideDown 0.4s ease-out;
+}
+
+.formulario-edicion label {
+  display: block;
+  margin-bottom: 20px;
+  color: #8b4513;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.formulario-edicion input {
+  margin-top: 8px;
+  padding: 12px 16px;
+  border: 2px solid #f5f5dc;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #fffacd 100%);
+}
+
+.formulario-edicion input:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+}
+
+/* Botones de edición */
+.botones-edicion {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.botones-edicion button {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Animación para el menú desplegable */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efecto de hover para botones */
+.btn-secundario:hover {
+  background: linear-gradient(135deg, #ffa500 0%, #ffdb58 100%);
+  transform: translateY(-2px);
+}
+
+.btn-peligro:hover {
+  background: linear-gradient(135deg, #dc143c 0%, #b22222 100%);
+  transform: translateY(-2px);
 }

@@ -1,4 +1,3 @@
-// src/app/services/usuario.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:3000/usuarios'; // Ajusta el puerto si es necesario
+  private apiUrl = 'http://localhost:3000/api/user'; 
 
   constructor(private http: HttpClient) {}
 
