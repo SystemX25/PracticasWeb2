@@ -1,42 +1,107 @@
+/* ESTILOS PARA CARRITO - TEMA HAMBURGUESA */
+
+/* Contenedor principal del carrito */
 .carrito-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  background-color: #FFAA01;
-  padding: 2rem;
-  border-radius: 30px;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%); /* blanco a crema */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+  animation: fadeIn 0.6s ease-out;
+  border: 3px solid #d2b48c; /* color-pan-superior */
 }
 
+/* Título del carrito */
 .carrito-container h2 {
-  color: #512214;
+  background: linear-gradient(135deg, #8b4513 0%, #654321 100%); /* carne-cocida a carne-sellada */
+  color: #ffffff;
+  padding: 20px;
+  margin: -20px -20px 32px -20px;
+  border-radius: 12px 12px 0 0;
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 28px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
-ul.producto-lista {
+.carrito-container h2::after {
+  content: "🛒🍔";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+}
+
+/* Contenedor de productos */
+.contendor {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Lista de productos */
+.producto-lista {
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 
-ul.producto-lista li {
-  background-color: #F5F5F5;
-  border-left: 8px solid #FF8731;
-  border-radius: 20px;
-  margin-bottom: 1rem;
-  padding: 1rem;
+.producto-lista li {
   display: flex;
-  gap: 1rem;
   align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 2px solid #f5f5dc; /* color-cebolla-blanca */
+  gap: 16px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.producto-lista li:hover {
+  background: linear-gradient(135deg, #fff8dc 0%, #f5deb3 100%); /* crema a pan-sesamo */
+  border-color: #ffd700; /* color-queso-cheddar */
+  transform: translateX(5px);
+}
+
+.producto-lista li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* Información del producto */
+.producto-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-grow: 1;
 }
 
 .producto-imagen {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
-  border: 3px solid #087E8B;
+  border-radius: 8px;
+  border: 3px solid #ffd700; /* color-queso-cheddar */
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+}
+
+.producto-imagen:hover {
+  transform: scale(1.05);
+  border-color: #ffa500; /* color-queso-americano */
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
 }
 
 .producto-detalles {
@@ -44,148 +109,271 @@ ul.producto-lista li {
 }
 
 .producto-nombre {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #512214;
+  font-weight: 600;
+  color: #8b4513; /* color-carne-cocida */
+  font-size: 18px;
+  display: block;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.producto-nombre::before {
+  content: "🍔";
+  margin-right: 8px;
+  font-size: 16px;
 }
 
 .producto-precio {
-  color: #087E8B;
-  font-weight: bold;
+  color: #ff4500; /* color-salsa-ketchup */
+  font-weight: 700;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 4px;
 }
 
-.producto-cantidad {
-  font-size: 1.1rem;
-  color: #512214;
+.producto-precio::before {
+  content: "💰";
+  margin-right: 4px;
 }
 
-.boton {
-  background-color: #087E8B;
-  border: none;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.producto-stock {
+  color: #666666; /* color-gris */
+  font-size: 14px;
+  display: block;
 }
 
-.boton:hover {
-  background-color: #065a63;
+.producto-stock::before {
+  content: "📦";
+  margin-right: 4px;
 }
 
-.boton-generar {
-  width: 100%;
-  background-color: #512214;
-  color: #FFAA01;
-  margin-top: 1.5rem;
-}
-
-.boton-generar:hover {
-  background-color: #3a1919;
-}
-
-.carrito-vacio {
-  text-align: center;
-  font-style: italic;
-  color: #512214;
-  margin-top: 2rem;
-  font-size: 1.2rem;
-}
-
-.boton-agregar {
-  background-color: #3ac92d;
-  border: none;
-  color: white;
-  margin-left: 5px;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.boton-agregar:hover {
-  background-color: #2e9e24;
-}
-
-.boton-eliminar {
-  background-color: #f10d0d;
-  border: none;
-  color: white;
-  margin-right: 5px;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.boton-eliminar:hover {
-  background-color: #c00a0a;
-}
-
-.producto-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 60%;
-}
-
+/* Controles de cantidad */
 .mover {
   display: flex;
   align-items: center;
-  gap: 5px;
-  margin-left: auto;
+  gap: 12px;
+  background: linear-gradient(135deg, #fff8dc 0%, #f5deb3 100%); /* crema a pan-sesamo */
+  padding: 8px;
+  border-radius: 8px;
+  border: 2px solid #deb887; /* color-cebolla-caramelizada */
 }
 
+.boton-eliminar,
+.boton-agregar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+}
+
+.boton-eliminar {
+  background: linear-gradient(135deg, #ff6347 0%, #dc143c 100%); /* tomate-maduro a tomate-cherry */
+  color: #ffffff;
+}
+
+.boton-eliminar:hover {
+  background: linear-gradient(135deg, #dc143c 0%, #b22222 100%); /* tomate-cherry a tomate-concentrado */
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+}
+
+.boton-agregar {
+  background: linear-gradient(135deg, #90ee90 0%, #32cd32 100%); /* lechuga-fresca a lechuga-iceberg */
+  color: #ffffff;
+}
+
+.boton-agregar:hover:not(:disabled) {
+  background: linear-gradient(135deg, #32cd32 0%, #228b22 100%); /* lechuga-iceberg a lechuga-oscura */
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+}
+
+.boton-agregar:disabled {
+  background: #666666; /* color-gris */
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.producto-cantidad {
+  font-weight: 600;
+  min-width: 40px;
+  text-align: center;
+  color: #8b4513; /* color-carne-cocida */
+  font-size: 16px;
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #ffd700; /* color-queso-cheddar */
+}
+
+/* Sección de totales */
 .totales {
-  background-color: #f5f5f5;
-  padding: 1rem;
-  border-radius: 10px;
-  margin-top: 1rem;
+  background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%); /* pan-sesamo a cebolla-caramelizada */
+  padding: 24px;
+  border-radius: 8px;
+  margin: 24px 0;
+  border: 3px solid #ffd700; /* color-queso-cheddar */
+  position: relative;
+}
+
+.totales::before {
+  content: "🧾🍔";
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: #ffffff;
+  padding: 0 10px;
+  font-size: 18px;
 }
 
 .total-linea {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #8b4513; /* color-carne-cocida */
+  font-weight: 500;
 }
 
 .total-linea.total {
-  font-weight: bold;
-  font-size: 1.3rem;
-  border-top: 1px solid #ddd;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
+  font-weight: 700;
+  font-size: 20px;
+  color: #654321; /* color-carne-sellada */
+  border-top: 3px solid #ffd700; /* color-queso-cheddar */
+  padding-top: 12px;
+  margin-top: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%); /* blanco a crema */
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
 }
 
+.total-linea.total::before {
+  content: "💰";
+  margin-right: 8px;
+  color: #ffd700; /* color-queso-cheddar */
+}
+
+/* Mensaje de carrito vacío */
+.carrito-vacio {
+  text-align: center;
+  color: #666666; /* color-gris */
+  font-size: 18px;
+  padding: 40px;
+  background: linear-gradient(135deg, #fff8dc 0%, #f5deb3 100%); /* crema a pan-sesamo */
+  border-radius: 8px;
+  border: 2px dashed #deb887; /* color-cebolla-caramelizada */
+  position: relative;
+}
+
+.carrito-vacio::before {
+  content: "🛒💔";
+  display: block;
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+/* Contenedor de PayPal */
 .paypal-container {
-  margin-top: 1.5rem;
-  min-height: 50px;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 10px;
+  margin-top: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff8dc 0%, #f5deb3 100%); /* crema a pan-sesamo */
+  border-radius: 8px;
+  border: 3px solid #ffd700; /* color-queso-cheddar */
+  position: relative;
 }
 
-/* Estilos responsivos */
-@media (max-width: 600px) {
-  .carrito-container {
-    padding: 1rem;
-    margin: 1rem;
+.paypal-container::before {
+  content: "💳🍔";
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: #ffffff;
+  padding: 0 10px;
+  font-size: 18px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  ul.producto-lista li {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carrito-container {
+    margin: 20px;
+    padding: 16px;
+  }
+
+  .carrito-container h2 {
+    font-size: 24px;
+    margin: -16px -16px 24px -16px;
+  }
+
+  .producto-lista li {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
   }
-  
+
   .producto-info {
     width: 100%;
-    margin-bottom: 0.5rem;
   }
-  
+
   .mover {
-    margin-left: 0;
-    width: 100%;
-    justify-content: flex-end;
+    align-self: flex-end;
+  }
+
+  .totales {
+    padding: 16px;
+  }
+
+  .total-linea {
+    font-size: 14px;
+  }
+
+  .total-linea.total {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .producto-imagen {
+    width: 60px;
+    height: 60px;
+  }
+
+  .producto-nombre {
+    font-size: 16px;
+  }
+
+  .producto-precio {
+    font-size: 14px;
+  }
+
+  .boton-eliminar,
+  .boton-agregar {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .producto-cantidad {
+    font-size: 14px;
   }
 }

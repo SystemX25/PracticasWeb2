@@ -1,58 +1,144 @@
+/* ESTILOS PARA INICIO DE SESIÓN - TEMA HAMBURGUESA */
+
 .login-container {
   max-width: 400px;
   margin: 80px auto;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #ffffff;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(139, 69, 19, 0.2);
   text-align: center;
-  font-family: 'Segoe UI', sans-serif;
+  animation: fadeIn 0.6s ease-out;
+  border: 3px solid #d2b48c; /* color-pan-superior */
 }
 
 .login-container h2 {
-  margin-bottom: 1.5rem;
-  color: #512214; /* Marrón carne */
+  color: #8b4513; /* color-carne-cocida */
+  margin-bottom: 32px;
+  font-size: 28px;
+  text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.3);
+  position: relative;
+}
+
+.login-container h2::after {
+  content: "🍔";
+  display: block;
+  font-size: 32px;
+  margin-top: 8px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
 .login-container input {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+  text-align: center;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: 2px solid #f5f5dc; /* color-cebolla-blanca */
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #fffacd 100%); /* blanco a salsa-mayo */
 }
 
 .login-container input:focus {
-  border-color: #FFAA01; /* Amarillo pan */
-  outline: none;
+  border-color: #ffd700; /* color-queso-cheddar */
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+  background: #ffffff;
 }
 
-.invalid {
-  border: 1px solid red;
+.login-container input::placeholder {
+  color: #a0522d; /* color-carne-jugosa */
 }
 
-.login-container button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #FF8731; /* Naranja queso */
+.login-container button[type="submit"] {
+  background: linear-gradient(135deg, #8b4513 0%, #654321 100%); /* carne-cocida a carne-sellada */
+  color: #ffffff;
+  padding: 16px 24px;
   border: none;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 8px;
+  border-radius: 25px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-container button[type="submit"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent); /* queso-cheddar */
+  transition: left 0.5s;
+  opacity: 0.3;
+}
+
+.login-container button[type="submit"]:hover::before {
+  left: 100%;
+}
+
+.login-container button[type="submit"]:hover {
+  background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%); /* carne-jugosa a carne-cocida */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+}
+
+.login-container p {
+  margin: 16px 0;
+  color: #666666; /* color-gris */
+  font-size: 14px;
+}
+
+.login-container a {
+  color: #ff4500; /* color-salsa-ketchup */
+  text-decoration: none;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
-.login-container button:hover {
-  background-color: #512214; /* Marrón carne */
-  transform: scale(1.05);
+.login-container a:hover {
+  color: #ff6347; /* color-tomate-maduro */
+  text-decoration: underline;
 }
 
 .error {
-  color: red;
-  margin-top: 1rem;
-  font-size: 0.95rem;
+  color: #dc143c; /* color-error */
+  background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%);
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #dc143c; /* color-tomate-cherry */
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-container {
+    margin: 20px;
+    padding: 24px;
+  }
+
+  .login-container h2 {
+    font-size: 24px;
+  }
 }

@@ -1,136 +1,262 @@
+/* ESTILOS PARA MENÚ/CATÁLOGO - TEMA HAMBURGUESA */
+
+/* Toolbar/Header */
 .toolbar {
-    background: #FFAA01; /* Amarillo pan */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
+  background: linear-gradient(135deg, #8b4513 0%, #654321 100%); /* carne-cocida a carne-sellada */
+  color: #ffffff;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+  flex-wrap: wrap;
+  position: relative;
 }
 
-button {
-    background-color: #FF8731; /* Naranja queso */
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
+.toolbar::before {
+  content: "🍔🍟🥤";
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  font-size: 16px;
+  opacity: 0.7;
 }
 
-button:hover {
-    background-color: #512214; /* Marrón carne */
-    color: white;
-    transform: scale(1.1);
+.toolbar img {
+  border-radius: 50%;
+  border: 3px solid #ffd700; /* color-queso-cheddar */
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
+.toolbar img:hover {
+  transform: scale(1.05);
+  border-color: #ffa500; /* color-queso-americano */
+}
+
+.toolbar h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffd700; /* color-queso-cheddar */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  flex-grow: 1;
+  margin: 0;
+  position: relative;
+}
+
+.toolbar h2::after {
+  content: "🍔";
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.toolbar button {
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); /* queso-cheddar a queso-americano */
+  color: #8b4513; /* color-carne-cocida */
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+  border: 2px solid #d2b48c; /* color-pan-superior */
+}
+
+.toolbar button:hover {
+  background: linear-gradient(135deg, #ffa500 0%, #ffdb58 100%); /* queso-americano a salsa-mostaza */
+  color: #654321; /* color-carne-sellada */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+}
+
+/* Buscador */
+.buscador {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+.buscador::before {
+  content: "🔍";
+  position: absolute;
+  left: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  z-index: 1;
+  color: #a0522d; /* color-carne-jugosa */
+}
+
+.buscador input {
+  font-size: 18px;
+  padding: 16px 20px 16px 50px;
+  border-radius: 25px;
+  border: 3px solid #d2b48c; /* color-pan-superior */
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%); /* blanco a crema */
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.buscador input:focus {
+  outline: none;
+  border-color: #ffd700; /* color-queso-cheddar */
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+  transform: scale(1.02);
+  background: #ffffff;
+}
+
+.buscador input::placeholder {
+  color: #a0522d; /* color-carne-jugosa */
+}
+
+/* Título del catálogo */
+h2 {
+  text-align: center;
+  color: #8b4513; /* color-carne-cocida */
+  margin: 32px 0;
+  font-size: 32px;
+  text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.3);
+  position: relative;
+}
+
+h2::before {
+  content: "🍔";
+  margin-right: 10px;
+}
+
+h2::after {
+  content: "🍔";
+  margin-left: 10px;
+}
+
+/* Grid de productos */
 .productos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-    background-color: #F5F5F5; /* Fondo gris claro */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .producto {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    text-align: center;
-    width: 220px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%); /* blanco a crema */
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+  transition: all 0.3s ease;
+  border: 3px solid #d2b48c; /* color-pan-superior */
+  animation: fadeIn 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.producto::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, #ffff99, transparent); /* queso-suave */
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform: rotate(45deg);
+}
+
+.producto:hover::before {
+  opacity: 0.1;
+  animation: shine 1s ease-in-out;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
 }
 
 .producto:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+  border-color: #ffd700; /* color-queso-cheddar */
 }
 
 .producto img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+  border: 2px solid #cd853f; /* color-pan-inferior */
+}
+
+.producto img:hover {
+  transform: scale(1.05);
+  border-color: #ffd700; /* color-queso-cheddar */
 }
 
 .producto h3 {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #512214; /* Marrón carne */
+  color: #8b4513; /* color-carne-cocida */
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .producto p {
-    font-size: 16px;
-    color: #666;
-}
-
-.boton-agregar {
-    background-color: #087E8B; /* Verde lechuga */
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.boton-agregar:hover {
-    background-color: #FF8731; /* Naranja queso */
-}
-
-.buscador {
-  margin: 20px 0;
-  text-align: center;
-}
-
-.buscador input {
-  width: 50%;
-  padding: 8px;
+  color: #666666; /* color-gris */
+  margin-bottom: 8px;
   font-size: 16px;
 }
 
-.mensaje-agregado {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 10px;
-  margin: 15px auto;
-  border: 1px solid #c3e6cb;
-  border-radius: 5px;
-  font-weight: bold;
-  width: fit-content;
-  max-width: 90%;
-  text-align: center;
+.producto p:first-of-type {
+  color: #ff4500; /* color-salsa-ketchup */
+  font-weight: 600;
 }
 
-.buscador {
-  margin: 20px 0;
-  text-align: center;
-}
-.buscador input {
-  width: 50%;
-  padding: 8px;
-  font-size: 16px;
-}
-
-.productos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.producto {
-  border: 1px solid #ccc;
-  padding: 15px;
+.producto button {
+  margin-top: 16px;
+  width: 100%;
+  background: linear-gradient(135deg, #8b4513 0%, #654321 100%); /* carne-cocida a carne-sellada */
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
   border-radius: 8px;
-  width: 200px;
-  text-align: center;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Modal emergente */
+.producto button::after {
+  content: "🛒";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.8;
+}
+
+.producto button:hover {
+  background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%); /* carne-jugosa a carne-cocida */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+}
+
+/* Modal/Popup */
 .popup-modal {
   display: none;
   position: fixed;
@@ -139,30 +265,107 @@ button:hover {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(139, 69, 19, 0.5);
+  backdrop-filter: blur(2px);
 }
 
 .popup-content {
-  background-color: #fff;
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%); /* blanco a crema */
   margin: 15% auto;
-  padding: 20px 30px;
-  border: 1px solid #888;
-  width: 80%;
+  padding: 32px;
+  border-radius: 12px;
+  width: 90%;
   max-width: 400px;
   text-align: center;
-  font-size: 18px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px #333;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(139, 69, 19, 0.2);
+  animation: popupSlide 0.3s ease-out;
+  border: 3px solid #ffd700; /* color-queso-cheddar */
+}
+
+@keyframes popupSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .close-button {
-  color: #aaa;
-  float: right;
+  position: absolute;
+  top: 16px;
+  right: 20px;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  color: #666666; /* color-gris */
+  transition: all 0.3s ease;
 }
+
 .close-button:hover {
-  color: #000;
+  color: #dc143c; /* color-tomate-cherry */
+  transform: scale(1.1);
+}
+
+.popup-content p {
+  color: #8b4513; /* color-carne-cocida */
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.popup-content p::before {
+  content: "✅ ";
+  color: #32cd32; /* color-lechuga-iceberg */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .toolbar h2 {
+    font-size: 20px;
+  }
+
+  .productos {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .buscador {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .productos {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .producto {
+    padding: 16px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
 }

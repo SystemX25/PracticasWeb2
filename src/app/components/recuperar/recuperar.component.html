@@ -1,53 +1,88 @@
-<div style="max-width: 400px; margin: 80px auto; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); background-color: #ffffff; text-align: center; font-family: 'Segoe UI', sans-serif;">
-  <h2 style="margin-bottom: 1.5rem; color: #512214;">Recuperar Contraseña</h2>
+<div class="recuperar-container" [class.form-loading]="isLoading">
+  <h2>Recuperar Contraseña</h2>
 
-  <form (ngSubmit)="recuperarContrasena()" style="margin-bottom: 1.5rem; text-align: left;">
-    <div style="margin-bottom: 1.25rem;">
-      <label for="nombre" style="display: block; margin-bottom: 0.5rem; color: #512214; font-weight: 600;">Nombre de usuario:</label>
+  <!-- Instrucciones -->
+  <div class="instrucciones">
+    <h4>¿Olvidaste tu contraseña?</h4>
+    <ul>
+      <li>Ingresa tu nombre de usuario y correo electrónico</li>
+      <li>Te enviaremos un enlace para restablecer tu contraseña</li>
+      <li>Revisa tu bandeja de entrada y spam</li>
+    </ul>
+  </div>
+
+  <form (ngSubmit)="recuperarContrasena()">
+    <div class="form-group">
+      <label for="nombre">Nombre de usuario:</label>
       <input
         id="nombre"
         name="nombre"
         type="text"
         [(ngModel)]="nombre"
+        [class.invalid]="errores.nombre"
+        placeholder="Ingresa tu nombre de usuario"
         required
-        style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;"
-        [style.border-color]="nombre ? '#FFAA01' : '#ccc'"
       >
+      <div *ngIf="errores.nombre" class="invalid-feedback">
+        El nombre de usuario es requerido
+      </div>
     </div>
 
-    <div style="margin-bottom: 1.5rem;">
-      <label for="correo" style="display: block; margin-bottom: 0.5rem; color: #512214; font-weight: 600;">Correo electrónico:</label>
+    <div class="form-group">
+      <label for="correo">Correo electrónico:</label>
       <input
         id="correo"
         name="correo_electronico"
         type="email"
         [(ngModel)]="email"
+        [class.invalid]="errores.email"
+        placeholder="Ingresa tu correo electrónico"
         required
-        style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;"
-        [style.border-color]="email ? '#FFAA01' : '#ccc'"
       >
+      <!-- Validación de email en tiempo real -->
+      <div *ngIf="email && !errores.email && validarEmail(email)" 
+           class="email-validation valid">
+        Correo electrónico válido
+      </div>
+      <div *ngIf="email && !validarEmail(email)" 
+           class="email-validation invalid">
+        Formato de correo electrónico inválido
+      </div>
+      <div *ngIf="errores.email" class="invalid-feedback">
+        El correo electrónico es requerido y debe ser válido
+      </div>
     </div>
 
     <button 
       type="submit" 
-      [disabled]="!nombre || !email || isLoading"
-      style="width: 100%; padding: 0.75rem; background-color: #FF8731; border: none; color: white; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;"
-      [style.background-color]="(!nombre || !email || isLoading) ? '#ccc' : '#FF8731'"
-
+      [disabled]="!nombre || !email || isLoading || !validarEmail(email)"
+      [class.form-loading]="isLoading"
     >
       {{ isLoading ? 'Procesando...' : 'Recuperar Contraseña' }}
     </button>
   </form>
 
+  <!-- Mensajes de estado -->
   <div *ngIf="mensaje" 
-       style="margin-top: 1.5rem; padding: 1rem; background-color: #f8f9fa; border-radius: 6px; color: #512214; text-align: center; border-left: 4px solid #FFAA01;">
+       [ngClass]="{
+         'mensaje-exito': mensaje.includes('enviado') || mensaje.includes('éxito') || mensaje.includes('correo'),
+         'mensaje-error': mensaje.includes('error') || mensaje.includes('Error') || mensaje.includes('encontramos'),
+         'mensaje-info': mensaje.includes('completa') || mensaje.includes('campos')
+       }"
+       class="mensaje-container"
+       [class.success-animation]="mensaje.includes('enviado')">
     {{ mensaje }}
   </div>
 
-  <div style="text-align: center; margin-top: 1.5rem;">
-    <a routerLink="/" 
-       style="color: #FF8731; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
-      <span style="font-size: 1.2rem;">←</span> Volver al Login
+  <!-- Contador de tiempo para reenvío (opcional) -->
+  <div *ngIf="isLoading" class="countdown">
+    Procesando tu solicitud...
+  </div>
+
+  <!-- Enlace para volver -->
+  <div class="volver-link">
+    <a routerLink="/">
+      <span>←</span> Volver al Login
     </a>
   </div>
 </div>

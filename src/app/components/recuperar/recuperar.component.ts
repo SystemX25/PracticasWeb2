@@ -6,10 +6,10 @@ import { RecuperarService } from '../../services/recuperar.service';
 
 @Component({
   selector: 'app-recuperar',
-  templateUrl: './recuperar.component.html',
   standalone: true,
-  styleUrls: ['./recuperar.component.css'],
-  imports: [FormsModule, CommonModule, RouterModule]
+  imports: [FormsModule, CommonModule, RouterModule],
+  templateUrl: './recuperar.component.html',
+  styleUrls: ['./recuperar.component.css'] // ← Asegúrate de que sea styleUrls
 })
 export class RecuperarComponent {
   nombre: string = '';
@@ -27,7 +27,6 @@ export class RecuperarComponent {
     // Resetear estados
     this.mensaje = '';
     this.errores = { nombre: false, email: false };
-
 
     // Validación
     let hasError = false;
@@ -58,7 +57,6 @@ export class RecuperarComponent {
         console.log('Respuesta del servidor:', res);
         if (res.mensaje) {
           this.mensaje = res.mensaje;
-          // Solo para desarrollo
           console.log('Datos de respuesta:', res.datos);
         } else {
           this.mensaje = res.error || 'Ocurrió un error al procesar tu solicitud.';
@@ -81,7 +79,8 @@ export class RecuperarComponent {
     });
   }
 
-  private validarEmail(email: string): boolean {
+  // ← Cambio aquí: quitar 'private' para que sea público
+  validarEmail(email: string): boolean {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   }

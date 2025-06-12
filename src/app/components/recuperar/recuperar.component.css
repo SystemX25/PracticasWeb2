@@ -1,84 +1,416 @@
+/* ESTILOS PARA RECUPERAR CONTRASEÑA - TEMA HAMBURGUESA */
+
 .recuperar-container {
   max-width: 400px;
-  margin: 2rem auto;
+  margin: 80px auto;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: white;
-  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 8px 24px rgba(139, 69, 19, 0.2);
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%); /* blanco a crema */
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+  animation: fadeIn 0.6s ease-out;
+  border: 3px solid #d2b48c; /* color-pan-superior */
+  position: relative;
+}
+
+.recuperar-container::before {
+  content: "🔐🍔";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  padding: 0 10px;
+  font-size: 20px;
 }
 
 .recuperar-container h2 {
-  text-align: center;
-  color: #512214; /* Marrón carne */
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  color: #8b4513; /* color-carne-cocida */
+  font-size: 28px;
+  text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.3);
+  position: relative;
+}
+
+.recuperar-container h2::after {
+  content: "🔄";
+  display: block;
+  font-size: 24px;
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+.recuperar-container form {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.recuperar-container .form-group {
+  margin-bottom: 1.25rem;
+  position: relative;
 }
 
 .recuperar-container label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #512214; /* Marrón carne */
+  color: #8b4513; /* color-carne-cocida */
   font-weight: 600;
+  font-size: 14px;
+}
+
+.recuperar-container label::before {
+  content: "📧";
+  margin-right: 6px;
+  color: #ffd700; /* color-queso-cheddar */
 }
 
 .recuperar-container input {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ccc;
+  border: 2px solid #f5f5dc; /* color-cebolla-blanca */
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #fffacd 100%); /* blanco a salsa-mayo */
 }
 
 .recuperar-container input:focus {
-  border-color: #FFAA01; /* Amarillo pan */
   outline: none;
+  border-color: #ffd700; /* color-queso-cheddar */
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+  background: #ffffff;
+}
+
+.recuperar-container input:valid {
+  border-color: #90ee90; /* color-lechuga-fresca */
+  background: linear-gradient(135deg, #ffffff 0%, #f0fff0 100%);
+}
+
+.recuperar-container input:invalid:not(:focus):not(:placeholder-shown) {
+  border-color: #dc143c; /* color-tomate-cherry */
+  background: linear-gradient(135deg, #ffffff 0%, #fff0f0 100%);
+}
+
+.recuperar-container input::placeholder {
+  color: #a0522d; /* color-carne-jugosa */
+  opacity: 0.7;
 }
 
 .recuperar-container button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #FF8731; /* Naranja queso */
-  color: white;
+  background: linear-gradient(135deg, #8b4513 0%, #654321 100%); /* carne-cocida a carne-sellada */
   border: none;
-  border-radius: 8px;
+  color: #ffffff;
   font-size: 1rem;
   font-weight: bold;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.recuperar-container button::after {
+  content: "🔄";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.8;
+}
+
+.recuperar-container button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent); /* queso-cheddar */
+  transition: left 0.5s;
+  opacity: 0.3;
+}
+
+.recuperar-container button:hover::before {
+  left: 100%;
 }
 
 .recuperar-container button:hover:not(:disabled) {
-  background-color: #512214; /* Marrón carne */
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%); /* carne-jugosa a carne-cocida */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
 }
 
 .recuperar-container button:disabled {
-  background-color: #bbb;
+  background: #666666 !important; /* color-gris */
   cursor: not-allowed;
+  transform: none;
+  opacity: 0.6;
 }
 
-.recuperar-container .mensaje {
-  margin: 1.5rem 0;
-  padding: 1rem;
-  background-color: #F5F5F5;
+.recuperar-container button:disabled::after {
+  content: "⏳";
+}
+
+/* Estados del formulario */
+.form-loading {
+  position: relative;
+}
+
+.form-loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
-  color: #333;
-  text-align: center;
-  border-left: 5px solid #FFAA01; /* Amarillo pan */
 }
 
-.recuperar-container a {
-  color: #087E8B; /* Verde lechuga */
+.form-loading::before {
+  content: "🔄";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Mensajes de estado */
+.mensaje-container {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  animation: slideIn 0.5s ease-out;
+}
+
+.mensaje-exito {
+  background: linear-gradient(135deg, #90ee90 0%, #32cd32 100%); /* lechuga-fresca a lechuga-iceberg */
+  color: #ffffff;
+  border-left: 4px solid #228b22; /* color-lechuga-oscura */
+}
+
+.mensaje-exito::before {
+  content: "✅ ";
+  margin-right: 8px;
+}
+
+.mensaje-error {
+  background: linear-gradient(135deg, #ff6347 0%, #dc143c 100%); /* tomate-maduro a tomate-cherry */
+  color: #ffffff;
+  border-left: 4px solid #b22222; /* color-tomate-concentrado */
+}
+
+.mensaje-error::before {
+  content: "❌ ";
+  margin-right: 8px;
+}
+
+.mensaje-info {
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); /* queso-cheddar a queso-americano */
+  color: #8b4513; /* color-carne-cocida */
+  border-left: 4px solid #d2b48c; /* color-pan-superior */
+}
+
+.mensaje-info::before {
+  content: "ℹ️ ";
+  margin-right: 8px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enlace para volver */
+.volver-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%); /* pan-sesamo a cebolla-caramelizada */
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ffd700; /* color-queso-cheddar */
+}
+
+.volver-link a {
+  color: #ff4500; /* color-salsa-ketchup */
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
 }
 
-.recuperar-container a:hover {
-  color: #FF8731; /* Naranja queso */
+.volver-link a:hover {
+  color: #ff6347; /* color-tomate-maduro */
+  text-decoration: underline;
+  transform: translateX(-3px);
+}
+
+.volver-link span {
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.volver-link a:hover span {
+  transform: translateX(-2px);
+}
+
+/* Instrucciones */
+.instrucciones {
+  background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%); /* pan-sesamo a cebolla-caramelizada */
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 2px solid #ffd700; /* color-queso-cheddar */
+  text-align: left;
+}
+
+.instrucciones h4 {
+  color: #8b4513; /* color-carne-cocida */
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.instrucciones ul {
+  color: #666666; /* color-gris */
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+.instrucciones li {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.instrucciones li::before {
+  content: "🔸";
+  position: absolute;
+  left: -20px;
+  color: #ffd700; /* color-queso-cheddar */
+}
+
+/* Validación de email */
+.email-validation {
+  margin-top: 8px;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.email-validation.valid {
+  background: linear-gradient(135deg, #90ee90 0%, #32cd32 100%); /* lechuga-fresca a lechuga-iceberg */
+  color: #ffffff;
+}
+
+.email-validation.valid::before {
+  content: "✅ ";
+}
+
+.email-validation.invalid {
+  background: linear-gradient(135deg, #ff6347 0%, #dc143c 100%); /* tomate-maduro a tomate-cherry */
+  color: #ffffff;
+}
+
+.email-validation.invalid::before {
+  content: "❌ ";
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .recuperar-container {
+    margin: 20px;
+    padding: 1.5rem;
+  }
+
+  .recuperar-container h2 {
+    font-size: 24px;
+  }
+
+  .instrucciones {
+    padding: 12px;
+  }
+
+  .instrucciones h4 {
+    font-size: 14px;
+  }
+
+  .instrucciones ul {
+    font-size: 12px;
+  }
+}
+
+/* Animación de éxito */
+.success-animation {
+  animation: successPulse 0.6s ease-out;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Contador de tiempo */
+.countdown {
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); /* queso-cheddar a queso-americano */
+  color: #8b4513; /* color-carne-cocida */
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 12px;
+  display: inline-block;
+  border: 2px solid #d2b48c; /* color-pan-superior */
+}
+
+.countdown::before {
+  content: "⏰ ";
+  margin-right: 4px;
 }
