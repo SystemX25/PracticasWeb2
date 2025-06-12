@@ -4,16 +4,20 @@ import { ProductoService } from '../../services/producto.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CarritoService } from '../../services/carrito.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-producto',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.css'
 })
 export class ProductoComponent implements OnInit {
   productos: Producto[] = [];
-  mostrarInventario: boolean = false; // <- NUEVA propiedad
+  mostrarInventario: boolean = false;
+  terminoBusqueda: string = '';
+  mensajeAgregado: string = '';
 
   constructor(
     private productosService: ProductoService,
@@ -22,26 +26,28 @@ export class ProductoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Obtener productos
     this.productosService.obtenerProductos().subscribe((data: Producto[]) => {
       this.productos = data;
     });
 
-    // Verificar usuario desde localStorage
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-
-    // Ejemplo: mostrar inventario solo si el usuario tiene ID 1
     if (usuario && usuario.id === 1) {
       this.mostrarInventario = true;
     }
-
-    // Otra opción: mostrar si tiene rol "admin"
-    // this.mostrarInventario = usuario?.rol === 'admin';
   }
 
   agregarAlCarrito(producto: Producto): void {
-    
     this.carritoService.agregarProducto(producto);
+    this.mensajeAgregado = `Agregaste "${producto.nombre}" al carrito`;
+
+    const modal = document.getElementById('popup');
+    if (modal) {
+      modal.style.display = 'block';
+      setTimeout(() => {
+        modal.style.display = 'none';
+        this.mensajeAgregado = '';
+      }, 30000); // 30 segundos
+    }
   }
 
   irAlCarrito(): void {
@@ -51,4 +57,16 @@ export class ProductoComponent implements OnInit {
   irInventario(): void {
     this.router.navigate(['/inventario']);
   }
+
+  get productosFiltrados(): Producto[] {
+    if (!this.terminoBusqueda.trim()) return this.productos;
+    return this.productos.filter(producto =>
+      producto.nombre.toLowerCase().includes(this.terminoBusqueda.toLowerCase())
+    );
+  }
+
+  
+irAlPerfil(): void {
+  this.router.navigate(['/perfil']);
+}
 }

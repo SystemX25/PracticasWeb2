@@ -2,18 +2,37 @@
   <img src="asset/logo.png" alt="logo de la empresa" width="75px" height="75px" />
   <h2>CETI BURGUER</h2>
   <button (click)="irAlCarrito()">Ver Carrito</button>
-
-  <!-- Solo se muestra si mostrarInventario es true -->
   <button *ngIf="mostrarInventario" (click)="irInventario()">Ir a Inventario</button>
+  <button (click)="irAlPerfil()">Mi Perfil</button>
+</div>
+
+<!-- Buscador -->
+<div class="buscador">
+  <input
+    type="text"
+    [(ngModel)]="terminoBusqueda"
+    placeholder="Buscar producto por nombre..."
+  />
 </div>
 
 <h2>Catálogo de Productos</h2>
 <div class="productos">
-  <div *ngFor="let producto of productos" class="producto">
+  <div *ngFor="let producto of productosFiltrados" class="producto">
     <img [src]="producto.imagen" alt="imagen del producto" />
     <h3>{{ producto.nombre }}</h3>
     <p>Precio: ${{ producto.precio }}</p>
-    <p>Stock: {{producto.stock}}</p>
-    <button (click)="agregarAlCarrito(producto)" >Agregar al Carrito</button>
+    <p>Stock: {{ producto.stock }}</p>
+    <button (click)="agregarAlCarrito(producto)">Agregar al Carrito</button>
+  </div>
+</div>
+
+<!-- Pantalla emergente (modal) -->
+<div id="popup" class="popup-modal">
+  <div class="popup-content">
+    <span
+  class="close-button"
+  onclick="const el = document.getElementById('popup'); if (el) el.style.display = 'none';"
+>&times;</span> 
+    <p>{{ mensajeAgregado }}</p>
   </div>
 </div>

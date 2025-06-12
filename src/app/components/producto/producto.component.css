@@ -82,3 +82,87 @@ button:hover {
 .boton-agregar:hover {
     background-color: #FF8731; /* Naranja queso */
 }
+
+.buscador {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.buscador input {
+  width: 50%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.mensaje-agregado {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin: 15px auto;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  font-weight: bold;
+  width: fit-content;
+  max-width: 90%;
+  text-align: center;
+}
+
+.buscador {
+  margin: 20px 0;
+  text-align: center;
+}
+.buscador input {
+  width: 50%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.producto {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+}
+
+/* Modal emergente */
+.popup-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px 30px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #333;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close-button:hover {
+  color: #000;
+}

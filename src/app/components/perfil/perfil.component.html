@@ -1,0 +1,19 @@
+<h2>Mi Perfil</h2>
+
+<div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
+
+<form (ngSubmit)="guardarCambios()">
+  <label>Nombre:
+    <input [(ngModel)]="usuario.nombre" name="nombre" required />
+  </label><br>
+
+  <label>Correo:
+    <input [(ngModel)]="usuario.correo" name="correo" required />
+  </label><br>
+
+  <label>Contraseña:
+    <input type="password" [(ngModel)]="usuario.password" name="password" required />
+  </label><br>
+
+  <button type="submit">Guardar Cambios</button>
+</form>
