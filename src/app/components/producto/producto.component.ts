@@ -40,6 +40,7 @@ export class ProductoComponent implements OnInit {
   }
 
   agregarAlCarrito(producto: Producto): void {
+    
     this.carritoService.agregarProducto(producto);
   }
 

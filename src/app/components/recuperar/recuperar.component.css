@@ -1,0 +1,84 @@
+.recuperar-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.recuperar-container h2 {
+  text-align: center;
+  color: #512214; /* Marrón carne */
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.recuperar-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #512214; /* Marrón carne */
+  font-weight: 600;
+}
+
+.recuperar-container input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.recuperar-container input:focus {
+  border-color: #FFAA01; /* Amarillo pan */
+  outline: none;
+}
+
+.recuperar-container button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #FF8731; /* Naranja queso */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.recuperar-container button:hover:not(:disabled) {
+  background-color: #512214; /* Marrón carne */
+  transform: scale(1.05);
+}
+
+.recuperar-container button:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+.recuperar-container .mensaje {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #F5F5F5;
+  border-radius: 8px;
+  color: #333;
+  text-align: center;
+  border-left: 5px solid #FFAA01; /* Amarillo pan */
+}
+
+.recuperar-container a {
+  color: #087E8B; /* Verde lechuga */
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s;
+}
+
+.recuperar-container a:hover {
+  color: #FF8731; /* Naranja queso */
+}

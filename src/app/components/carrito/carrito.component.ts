@@ -158,7 +158,6 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    
     this.paypalButtons.render('#paypal-button-container-fresh')
       .catch((err: any) => {
         console.error("Error al renderizar botones PayPal:", err);
@@ -171,7 +170,7 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
     
     carrito.forEach(producto => {
       if (agrupado[producto.id]) {
-        agrupado[producto.id].cantidad < agrupado[producto.id].stock ? agrupado[producto.id].cantidad++ : agrupado[producto.id].cantidad = agrupado[producto.id].stock ;
+        agrupado[producto.id].cantidad < agrupado[producto.id].stock ? agrupado[producto.id].cantidad++ : agrupado[producto.id].cantidad = agrupado[producto.id].stock;
         agrupado[producto.id].precioTotal = producto.precio * agrupado[producto.id].cantidad;
       } else {
         agrupado[producto.id] = { 

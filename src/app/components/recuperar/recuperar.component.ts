@@ -8,6 +8,7 @@ import { RecuperarService } from '../../services/recuperar.service';
   selector: 'app-recuperar',
   templateUrl: './recuperar.component.html',
   standalone: true,
+  styleUrls: ['./recuperar.component.css'],
   imports: [FormsModule, CommonModule, RouterModule]
 })
 export class RecuperarComponent {
