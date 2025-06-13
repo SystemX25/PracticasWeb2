@@ -1,241 +1,271 @@
 /* ESTILOS PARA RECUPERAR CONTRASEÑA - TEMA HAMBURGUESA */
-
 .recuperar-container {
-  max-width: 400px;
+  max-width: 500px;
   margin: 80px auto;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(139, 69, 19, 0.2);
-  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%); /* blanco a crema */
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(139, 69, 19, 0.25);
+  background: linear-gradient(135deg, #ffffff 0%, #fff8dc 100%);
   text-align: center;
   font-family: "Segoe UI", sans-serif;
   animation: fadeIn 0.6s ease-out;
-  border: 3px solid #d2b48c; /* color-pan-superior */
+  border: 3px solid #d2b48c;
   position: relative;
 }
 
 .recuperar-container::before {
   content: "🔐🍔";
   position: absolute;
-  top: -15px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
   background: #ffffff;
-  padding: 0 10px;
-  font-size: 20px;
+  padding: 0 15px;
+  font-size: 24px;
+  z-index: 1;
+  border-radius: 50%;
+  border: 2px solid #d2b48c;
 }
 
 .recuperar-container h2 {
   margin-bottom: 1.5rem;
-  color: #8b4513; /* color-carne-cocida */
+  color: #8b4513;
   font-size: 28px;
-  text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.3);
+  text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.2);
   position: relative;
+  padding-bottom: 10px;
 }
 
 .recuperar-container h2::after {
-  content: "🔄";
-  display: block;
-  font-size: 24px;
-  margin-top: 8px;
-  opacity: 0.7;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, #ffd700, #8b4513, #ffd700);
+  border-radius: 3px;
 }
 
+/* Formulario */
 .recuperar-container form {
   margin-bottom: 1.5rem;
   text-align: left;
 }
 
 .recuperar-container .form-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   position: relative;
 }
 
 .recuperar-container label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: #8b4513; /* color-carne-cocida */
+  margin-bottom: 0.75rem;
+  color: #8b4513;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
+  letter-spacing: 0.5px;
 }
 
 .recuperar-container label::before {
   content: "📧";
-  margin-right: 6px;
-  color: #ffd700; /* color-queso-cheddar */
+  margin-right: 8px;
+  color: #ffd700;
 }
 
 .recuperar-container input {
   width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #f5f5dc; /* color-cebolla-blanca */
-  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  border: 2px solid #f5f5dc;
+  border-radius: 10px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #ffffff 0%, #fffacd 100%); /* blanco a salsa-mayo */
+  background: linear-gradient(135deg, #ffffff 0%, #fffacd 100%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .recuperar-container input:focus {
   outline: none;
-  border-color: #ffd700; /* color-queso-cheddar */
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+  border-color: #ffd700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
   background: #ffffff;
 }
 
-.recuperar-container input:valid {
-  border-color: #90ee90; /* color-lechuga-fresca */
-  background: linear-gradient(135deg, #ffffff 0%, #f0fff0 100%);
-}
-
-.recuperar-container input:invalid:not(:focus):not(:placeholder-shown) {
-  border-color: #dc143c; /* color-tomate-cherry */
-  background: linear-gradient(135deg, #ffffff 0%, #fff0f0 100%);
-}
-
 .recuperar-container input::placeholder {
-  color: #a0522d; /* color-carne-jugosa */
-  opacity: 0.7;
+  color: #a0522d;
+  opacity: 0.6;
+  font-style: italic;
 }
 
+/* Botón */
 .recuperar-container button {
   width: 100%;
-  padding: 0.75rem;
-  background: linear-gradient(135deg, #8b4513 0%, #654321 100%); /* carne-cocida a carne-sellada */
+  padding: 1rem;
+  background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
   border: none;
-  color: #ffffff;
-  font-size: 1rem;
+  color: white;
+  font-size: 1.05rem;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2);
   position: relative;
   overflow: hidden;
-}
-
-.recuperar-container button::after {
-  content: "🔄";
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.8;
-}
-
-.recuperar-container button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, #ffd700, transparent); /* queso-cheddar */
-  transition: left 0.5s;
-  opacity: 0.3;
-}
-
-.recuperar-container button:hover::before {
-  left: 100%;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
 }
 
 .recuperar-container button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%); /* carne-jugosa a carne-cocida */
+  background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+  box-shadow: 0 6px 12px rgba(139, 69, 19, 0.25);
+}
+
+.recuperar-container button:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .recuperar-container button:disabled {
-  background: #666666 !important; /* color-gris */
+  background: #cccccc !important;
   cursor: not-allowed;
-  transform: none;
-  opacity: 0.6;
+  transform: none !important;
+  opacity: 0.7;
 }
 
-.recuperar-container button:disabled::after {
-  content: "⏳";
-}
-
-/* Estados del formulario */
-.form-loading {
-  position: relative;
-}
-
-.form-loading::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-}
-
-.form-loading::before {
-  content: "🔄";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  animation: spin 1s linear infinite;
-  z-index: 1;
-}
-
-@keyframes spin {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-/* Mensajes de estado */
+/* Mensajes */
 .mensaje-container {
-  margin-top: 1.5rem;
+  margin: 1.5rem 0;
   padding: 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   text-align: center;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   animation: slideIn 0.5s ease-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .mensaje-exito {
-  background: linear-gradient(135deg, #90ee90 0%, #32cd32 100%); /* lechuga-fresca a lechuga-iceberg */
-  color: #ffffff;
-  border-left: 4px solid #228b22; /* color-lechuga-oscura */
-}
-
-.mensaje-exito::before {
-  content: "✅ ";
-  margin-right: 8px;
+  background: linear-gradient(135deg, #90ee90 0%, #32cd32 100%);
+  color: white;
+  border-left: 5px solid #228b22;
 }
 
 .mensaje-error {
-  background: linear-gradient(135deg, #ff6347 0%, #dc143c 100%); /* tomate-maduro a tomate-cherry */
-  color: #ffffff;
-  border-left: 4px solid #b22222; /* color-tomate-concentrado */
+  background: linear-gradient(135deg, #ff6347 0%, #dc143c 100%);
+  color: white;
+  border-left: 5px solid #b22222;
 }
 
-.mensaje-error::before {
-  content: "❌ ";
+/* Instrucciones */
+.instrucciones {
+  background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%);
+  padding: 1.25rem;
+  border-radius: 10px;
+  margin-bottom: 1.75rem;
+  border: 2px solid #ffd700;
+  text-align: left;
+  box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.1);
+}
+
+.instrucciones h4 {
+  color: #8b4513;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.instrucciones h4::before {
+  content: "ℹ️";
   margin-right: 8px;
 }
 
-.mensaje-info {
-  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); /* queso-cheddar a queso-americano */
-  color: #8b4513; /* color-carne-cocida */
-  border-left: 4px solid #d2b48c; /* color-pan-superior */
+.instrucciones ul {
+  color: #5a3a1a;
+  font-size: 14px;
+  margin-left: 5px;
+  padding-left: 20px;
 }
 
-.mensaje-info::before {
-  content: "ℹ️ ";
-  margin-right: 8px;
+.instrucciones li {
+  margin-bottom: 8px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.instrucciones li::before {
+  content: "•";
+  position: absolute;
+  left: -15px;
+  color: #ffd700;
+  font-size: 20px;
+}
+
+/* Enlace para volver */
+.volver-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%);
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid #ffd700;
+  transition: all 0.3s ease;
+}
+
+.volver-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.15);
+}
+
+.volver-link a {
+  color: #ff4500;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.volver-link a:hover {
+  color: #ff6347;
+  text-decoration: underline;
+}
+
+.volver-link span {
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+/* Validación */
+.email-validation {
+  margin-top: 8px;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.email-validation.invalid {
+  background: linear-gradient(135deg, #ff6347 0%, #dc143c 100%);
+  color: white;
+  animation: shake 0.5s;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideIn {
@@ -249,168 +279,46 @@
   }
 }
 
-/* Enlace para volver */
-.volver-link {
-  text-align: center;
-  margin-top: 1.5rem;
-  background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%); /* pan-sesamo a cebolla-caramelizada */
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ffd700; /* color-queso-cheddar */
-}
-
-.volver-link a {
-  color: #ff4500; /* color-salsa-ketchup */
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.volver-link a:hover {
-  color: #ff6347; /* color-tomate-maduro */
-  text-decoration: underline;
-  transform: translateX(-3px);
-}
-
-.volver-link span {
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-}
-
-.volver-link a:hover span {
-  transform: translateX(-2px);
-}
-
-/* Instrucciones */
-.instrucciones {
-  background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%); /* pan-sesamo a cebolla-caramelizada */
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  border: 2px solid #ffd700; /* color-queso-cheddar */
-  text-align: left;
-}
-
-.instrucciones h4 {
-  color: #8b4513; /* color-carne-cocida */
-  margin-bottom: 12px;
-  font-size: 16px;
-}
-
-.instrucciones ul {
-  color: #666666; /* color-gris */
-  font-size: 14px;
-  margin-left: 20px;
-}
-
-.instrucciones li {
-  margin-bottom: 8px;
-  position: relative;
-}
-
-.instrucciones li::before {
-  content: "🔸";
-  position: absolute;
-  left: -20px;
-  color: #ffd700; /* color-queso-cheddar */
-}
-
-/* Validación de email */
-.email-validation {
-  margin-top: 8px;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.email-validation.valid {
-  background: linear-gradient(135deg, #90ee90 0%, #32cd32 100%); /* lechuga-fresca a lechuga-iceberg */
-  color: #ffffff;
-}
-
-.email-validation.valid::before {
-  content: "✅ ";
-}
-
-.email-validation.invalid {
-  background: linear-gradient(135deg, #ff6347 0%, #dc143c 100%); /* tomate-maduro a tomate-cherry */
-  color: #ffffff;
-}
-
-.email-validation.invalid::before {
-  content: "❌ ";
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
 }
 
 /* Responsive */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .recuperar-container {
-    margin: 20px;
-    padding: 1.5rem;
+    margin: 40px 20px;
+    padding: 1.75rem;
   }
-
+  
   .recuperar-container h2 {
     font-size: 24px;
   }
-
+  
   .instrucciones {
-    padding: 12px;
+    padding: 1rem;
   }
+  
+  .recuperar-container input {
+    padding: 0.75rem;
+  }
+  
+  .recuperar-container button {
+    padding: 0.85rem;
+  }
+}
 
-  .instrucciones h4 {
+@media (max-width: 400px) {
+  .recuperar-container {
+    padding: 1.5rem;
+  }
+  
+  .instrucciones li {
+    font-size: 13px;
+  }
+  
+  .volver-link a {
     font-size: 14px;
   }
-
-  .instrucciones ul {
-    font-size: 12px;
-  }
-}
-
-/* Animación de éxito */
-.success-animation {
-  animation: successPulse 0.6s ease-out;
-}
-
-@keyframes successPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Contador de tiempo */
-.countdown {
-  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); /* queso-cheddar a queso-americano */
-  color: #8b4513; /* color-carne-cocida */
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 12px;
-  display: inline-block;
-  border: 2px solid #d2b48c; /* color-pan-superior */
-}
-
-.countdown::before {
-  content: "⏰ ";
-  margin-right: 4px;
 }

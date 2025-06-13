@@ -7,14 +7,24 @@ import { Observable } from 'rxjs';
 })
 export class RecuperarService {
   private apiUrl = 'http://localhost:3000/api/user/recuperar';
+  private resetUrl = 'http://localhost:3000/api/user/reset-password';
 
   constructor(private http: HttpClient) {}
 
-  recuperarContrasena(nombre: string, email: string): Observable<any> {
-    console.log('Enviando:', { nombre, email }); // Agrega esto
+  solicitarRecuperacion(email: string): Observable<any> {
     return this.http.post<any>(this.apiUrl, { 
-      nombre,
       correo_electronico: email 
     });
+  }
+
+  resetearContrasena(token: string, nuevaContrasena: string): Observable<any> {
+    return this.http.post<any>(this.resetUrl, { 
+      token,
+      nuevaContrasena 
+    });
+  }
+
+  validarToken(token: string): Observable<any> {
+    return this.http.get<any>(`${this.resetUrl}/${token}`);
   }
 }

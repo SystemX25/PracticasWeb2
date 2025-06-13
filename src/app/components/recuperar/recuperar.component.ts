@@ -9,77 +9,57 @@ import { RecuperarService } from '../../services/recuperar.service';
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './recuperar.component.html',
-  styleUrls: ['./recuperar.component.css'] // ← Asegúrate de que sea styleUrls
+  styleUrls: ['./recuperar.component.css']
 })
 export class RecuperarComponent {
-  nombre: string = '';
   email: string = '';
   mensaje: string = '';
   isLoading: boolean = false;
-  errores: any = {
-    nombre: false,
-    email: false
-  };
+  errorEmail: boolean = false;
 
   constructor(private recuperarService: RecuperarService) {}
 
-  recuperarContrasena() {
+  solicitarRecuperacion() {
     // Resetear estados
     this.mensaje = '';
-    this.errores = { nombre: false, email: false };
+    this.errorEmail = false;
 
     // Validación
-    let hasError = false;
-    
-    if (!this.nombre.trim()) {
-      this.errores.nombre = true;
-      hasError = true;
-    }
-    
     if (!this.email.trim()) {
-      this.errores.email = true;
-      hasError = true;
+      this.errorEmail = true;
+      this.mensaje = 'Por favor, ingresa tu correo electrónico.';
+      return;
     } else if (!this.validarEmail(this.email)) {
-      this.errores.email = true;
-      hasError = true;
-    }
-
-    if (hasError) {
-      this.mensaje = 'Por favor, completa todos los campos correctamente.';
+      this.errorEmail = true;
+      this.mensaje = 'Por favor, ingresa un correo electrónico válido.';
       return;
     }
 
     this.isLoading = true;
 
-    this.recuperarService.recuperarContrasena(this.nombre, this.email).subscribe({
+    this.recuperarService.solicitarRecuperacion(this.email).subscribe({
       next: (res) => {
         this.isLoading = false;
-        console.log('Respuesta del servidor:', res);
         if (res.mensaje) {
-          this.mensaje = res.mensaje;
-          console.log('Datos de respuesta:', res.datos);
+          this.mensaje = '¡Listo! Hemos enviado un correo con instrucciones para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada (y la carpeta de spam).';
+          this.email = ''; 
         } else {
-          this.mensaje = res.error || 'Ocurrió un error al procesar tu solicitud.';
+          this.mensaje = 'Ocurrió un error al procesar tu solicitud.';
         }
       },
       error: (err) => {
         this.isLoading = false;
-        console.error('Error completo:', err);
-        
-        if (err.status === 400 && err.error?.camposFaltantes) {
-          this.errores.nombre = err.error.camposFaltantes.nombre;
-          this.errores.email = err.error.camposFaltantes.email;
-          this.mensaje = err.error.error;
-        } else if (err.status === 404) {
-          this.mensaje = 'No encontramos una cuenta con esas credenciales.';
+        if (err.status === 404) {
+          this.mensaje = 'No encontramos una cuenta con ese correo electrónico.';
+        } else if (err.status === 429) {
+          this.mensaje = 'Has realizado demasiadas solicitudes. Por favor, espera un momento antes de intentar nuevamente.';
         } else {
-          this.mensaje = 'Error al contactar al servidor. Por favor, intenta nuevamente.';
+          this.mensaje = 'Error al contactar al servidor. Por favor, intenta nuevamente más tarde.';
         }
       }
     });
   }
 
-  // ← Cambio aquí: quitar 'private' para que sea público
   validarEmail(email: string): boolean {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);

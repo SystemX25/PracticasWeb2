@@ -4,8 +4,9 @@
 
     app.use(cors({
         origin: 'http://localhost:4200', // Ajusta según tu puerto de Angular
-        methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
-        allowedHeaders: ['Content-Type']
+        methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH', 'OPTIONS'],
+        allowedHeaders: ['Content-Type'],
+        credentials: true
     }));
 
     app.use(express.json());
@@ -15,6 +16,8 @@
     
     const usuariosRouter = require('./app/routes/user.js');
     app.use('/api/user', usuariosRouter);
+
+    app.options('*', cors());
 
     app.listen(3000, () => {
         console.log('Servidor corriendo en http://localhost:3000');

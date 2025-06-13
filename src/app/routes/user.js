@@ -1,6 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../api/db.js');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'serviciotecnicopfc@gmail.com', 
+    pass: 'iapl vrer nomb hxha' 
+  }
+});
 
 router.get('/', (req, res) => {
   const { nombre, password } = req.query;
@@ -69,40 +79,101 @@ router.post('/register', (req, res) => {
   }); // Esta era la llave que faltaba
 });
 
-// Recuperar contraseña (versión mejorada)
 router.post('/recuperar', (req, res) => {
-  const { nombre, correo_electronico } = req.body;
-  console.log('Datos recibidos:', req.body);
+  const { correo_electronico } = req.body;
 
-  if (!nombre || !correo_electronico) {
-    return res.status(400).json({
-      error: 'Se requieren tanto el nombre como el correo electrónico'
-    });
+  if (!correo_electronico) {
+    return res.status(400).json({ error: 'El correo es requerido' });
   }
 
-  const sql = 'SELECT password FROM usuarios WHERE nombre = ? AND correo = ?';
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Methods', 'POST');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-  db.query(sql, [nombre, correo_electronico], (err, results) => {
-    console.log(results);
-    console.log(err);
+  db.query('SELECT id FROM usuarios WHERE correo = ?', [correo_electronico], (err, results) => {
     if (err) {
-      console.error('Error al recuperar contraseña:', err);
+      console.error('Error:', err);
       return res.status(500).json({ error: 'Error del servidor' });
     }
 
     if (results.length === 0) {
-      return res.status(404).json({
-        error: 'No se encontró usuario con esas credenciales'
+      return res.json({ 
+        mensaje: 'Si el correo existe, recibirás un enlace de recuperación' 
       });
     }
 
-    const contrasena = results[0].password;
-    console.log('Contraseña recuperada:', contrasena);
-    res.json({
-      mensaje: `Tu contraseña es: ${contrasena}`,
-      advertencia: 'Este es un método inseguro, solo para desarrollo'
-    });
+    const userId = results[0].id;
+    
+
+    const token = crypto.randomBytes(20).toString('hex');
+    const expiresAt = new Date(Date.now() + 3600000); // 1 hora
+
+    db.query(
+      'UPDATE usuarios SET reset_token = ?, reset_token_expira = ? WHERE id = ?',
+      [token, expiresAt, userId],
+      (err) => {
+        if (err) {
+          console.error('Error al guardar token:', err);
+          return res.status(500).json({ error: 'Error del servidor' });
+        }
+
+        // 4. Enviar el correo
+        const resetLink = `http://localhost:4200/reset-password?token=${token}&id=${userId}`;
+        
+        const mailOptions = {
+          from: 'serviciotecnicopfc@gmail.com',
+          to: correo_electronico,
+          subject: 'Recuperación de contraseña',
+          text: `Para restablecer tu contraseña, haz clic en este enlace: ${resetLink}\n\nEste enlace expirará en 1 hora.`
+        };
+
+        transporter.sendMail(mailOptions, (error) => {
+          if (error) {
+            console.error('Error al enviar email:', error);
+            return res.status(500).json({ error: 'Error al enviar el correo' });
+          }
+
+          res.json({ 
+            mensaje: 'Se ha enviado un enlace de recuperación a tu correo' 
+          });
+        });
+      }
+    );
   });
+});
+
+router.post('/reset-password', (req, res) => {
+  const { token, userId, nuevaContrasena } = req.body;
+
+  // 1. Verificar token válido y no expirado
+  db.query(
+    'SELECT id FROM usuarios WHERE id = ? AND reset_token = ? AND reset_token_expira > NOW()',
+    [userId, token],
+    (err, results) => {
+      if (err) {
+        console.error('Error:', err);
+        return res.status(500).json({ error: 'Error del servidor' });
+      }
+
+      if (results.length === 0) {
+        return res.status(400).json({ error: 'Token inválido o expirado' });
+      }
+
+      // 2. Actualizar contraseña y limpiar token
+      db.query(
+        'UPDATE usuarios SET password = ?, reset_token = NULL, reset_token_expira = NULL WHERE id = ?',
+        [nuevaContrasena, userId],
+        (err) => {
+          if (err) {
+            console.error('Error al actualizar contraseña:', err);
+            return res.status(500).json({ error: 'Error del servidor' });
+          }
+
+          res.json({ mensaje: 'Contraseña actualizada correctamente' });
+        }
+      );
+    }
+  );
 });
 
 // Obtener perfil

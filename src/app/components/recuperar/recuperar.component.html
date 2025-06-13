@@ -1,88 +1,47 @@
-<div class="recuperar-container" [class.form-loading]="isLoading">
-  <h2>Recuperar Contraseña</h2>
-
-  <!-- Instrucciones -->
+<div class="recuperar-container">
+  <h2>Recupera tu Contraseña</h2>
+  
   <div class="instrucciones">
     <h4>¿Olvidaste tu contraseña?</h4>
     <ul>
-      <li>Ingresa tu nombre de usuario y correo electrónico</li>
-      <li>Te enviaremos un enlace para restablecer tu contraseña</li>
-      <li>Revisa tu bandeja de entrada y spam</li>
+      <li>Ingresa tu correo electrónico registrado</li>
+      <li>Recibirás un enlace para restablecer tu contraseña</li>
+      <li>Sigue las instrucciones en el correo</li>
     </ul>
   </div>
 
-  <form (ngSubmit)="recuperarContrasena()">
-    <div class="form-group">
-      <label for="nombre">Nombre de usuario:</label>
-      <input
-        id="nombre"
-        name="nombre"
-        type="text"
-        [(ngModel)]="nombre"
-        [class.invalid]="errores.nombre"
-        placeholder="Ingresa tu nombre de usuario"
-        required
-      >
-      <div *ngIf="errores.nombre" class="invalid-feedback">
-        El nombre de usuario es requerido
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="correo">Correo electrónico:</label>
-      <input
-        id="correo"
-        name="correo_electronico"
-        type="email"
-        [(ngModel)]="email"
-        [class.invalid]="errores.email"
-        placeholder="Ingresa tu correo electrónico"
-        required
-      >
-      <!-- Validación de email en tiempo real -->
-      <div *ngIf="email && !errores.email && validarEmail(email)" 
-           class="email-validation valid">
-        Correo electrónico válido
-      </div>
-      <div *ngIf="email && !validarEmail(email)" 
-           class="email-validation invalid">
-        Formato de correo electrónico inválido
-      </div>
-      <div *ngIf="errores.email" class="invalid-feedback">
-        El correo electrónico es requerido y debe ser válido
-      </div>
-    </div>
-
-    <button 
-      type="submit" 
-      [disabled]="!nombre || !email || isLoading || !validarEmail(email)"
-      [class.form-loading]="isLoading"
-    >
-      {{ isLoading ? 'Procesando...' : 'Recuperar Contraseña' }}
-    </button>
-  </form>
-
-  <!-- Mensajes de estado -->
-  <div *ngIf="mensaje" 
-       [ngClass]="{
-         'mensaje-exito': mensaje.includes('enviado') || mensaje.includes('éxito') || mensaje.includes('correo'),
-         'mensaje-error': mensaje.includes('error') || mensaje.includes('Error') || mensaje.includes('encontramos'),
-         'mensaje-info': mensaje.includes('completa') || mensaje.includes('campos')
-       }"
-       class="mensaje-container"
-       [class.success-animation]="mensaje.includes('enviado')">
+  <div *ngIf="mensaje" class="mensaje-container" 
+       [class.mensaje-exito]="!errorEmail" 
+       [class.mensaje-error]="errorEmail">
     {{ mensaje }}
   </div>
 
-  <!-- Contador de tiempo para reenvío (opcional) -->
-  <div *ngIf="isLoading" class="countdown">
-    Procesando tu solicitud...
-  </div>
+  <form (ngSubmit)="solicitarRecuperacion()" [class.form-loading]="isLoading">
+    <div class="form-group">
+      <label for="email">Correo Electrónico</label>
+      <input 
+        type="email" 
+        id="email" 
+        class="form-control" 
+        [(ngModel)]="email" 
+        name="email"
+        [class.is-invalid]="errorEmail"
+        required
+        placeholder="tucorreo@ejemplo.com">
+      <div *ngIf="errorEmail" class="email-validation invalid">
+        Por favor ingresa un correo electrónico válido
+      </div>
+    </div>
 
-  <!-- Enlace para volver -->
+    <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Enviar Link de Recuperación</span>
+      <span *ngIf="isLoading">Enviando...</span>
+    </button>
+  </form>
+
   <div class="volver-link">
-    <a routerLink="/">
-      <span>←</span> Volver al Login
+    <a routerLink="/login">
+      <span>←</span> Volver al Inicio de Sesión
     </a>
   </div>
 </div>

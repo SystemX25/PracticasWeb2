@@ -22,8 +22,10 @@
     "@angular/router": "^19.1.0",
     "@angular/ssr": "^19.1.8",
     "@paypal/paypal-js": "^8.2.0",
+    "crypto": "^1.0.1",
     "express": "^4.18.2",
     "mysql": "^2.18.1",
+    "nodemailer": "^7.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
