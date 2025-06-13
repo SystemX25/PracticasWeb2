@@ -115,4 +115,5 @@ export class CarritoService {
     console.log('Enviando datos para actualizar stock:', productosParaEnviar);
     return this.http.put(`${this.apiUrl}/productos/actualizar-stock`, productosParaEnviar, httpOptions);
   }
+
 }

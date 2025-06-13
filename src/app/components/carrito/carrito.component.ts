@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CarritoService } from '../../services/carrito.service';
 import { Producto } from '../../models/producto';
 import { loadScript } from '@paypal/paypal-js';
+import { PedidosService } from '../../services/pedidos.service';
 
 @Component({
   selector: 'app-carrito',
@@ -16,7 +17,7 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
   private paypalButtons: any;
   private paypalScriptLoaded = false;
 
-  constructor(private carritoService: CarritoService) { }
+  constructor(private carritoService: CarritoService, private pedidosService: PedidosService) { }
 
   ngOnInit(): void {
     this.agruparProductos();
@@ -115,38 +116,54 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       onApprove: async (data: any, actions: any) => {
         try {
-          if (!actions.order) {
-            throw new Error('PayPal actions.order is undefined');
-          }
+          if (!actions.order) throw new Error('PayPal actions.order is undefined');
           
           const details = await actions.order.capture();
           const payerName = details.payer?.name?.given_name || 'cliente';
 
-          const productosParaActualizar = this.carritoAgrupado.map(producto => ({
-            id: Number(producto.id),
-            cantidadComprada: Number(producto.cantidad)
-          }));
-
-          this.carritoService.actualizarStock(productosParaActualizar).subscribe({
+          const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+          // Datos del pedido
+          const pedido = {
+            usuario_id: usuario.id,
+            total: this.calcularTotal(),
+            fecha: new Date().toISOString(),
+            productos: JSON.stringify(this.carritoAgrupado)
+          };
+          // Guardar el pedido
+          this.pedidosService.guardarPedido(pedido).subscribe({
             next: () => {
-              console.log('Stock actualizado correctamente');
-              
-              // Limpiar el carrito después de pago exitoso
-              this.carritoAgrupado = [];
-              this.cleanUpPayPal();
-              
-              alert(`¡Pago completado por ${payerName}! Gracias por tu compra.`);
-              this.generarXML();
-              this.carritoService.limpiarCarrito();
+              console.log('Pedido guardado en la base de datos');
+
+              // Luego de guardar, actualizamos el stock
+              const productosParaActualizar = this.carritoAgrupado.map(producto => ({
+                id: Number(producto.id),
+                cantidadComprada: Number(producto.cantidad)
+              }));
+
+              this.carritoService.actualizarStock(productosParaActualizar).subscribe({
+                next: () => {
+                  console.log('Stock actualizado correctamente');
+                  this.carritoAgrupado = [];
+                  this.cleanUpPayPal();
+                  this.generarXML();
+                  this.carritoService.limpiarCarrito();
+                  alert(`¡Pago completado por ${payerName}! Gracias por tu compra.`);
+                },
+                error: (err) => {
+                  console.error("Error al actualizar el stock:", err);
+                  alert('Pago completado, pero hubo un error al actualizar el stock.');
+                }
+              });
             },
             error: (err) => {
-              console.error("Error al actualizar el stock:", err);
-              alert('Pago completado pero hubo un error al actualizar el stock. Contacta al administrador.');
+              console.error('Error al guardar el pedido:', err);
+              alert('Pago completado, pero hubo un error al guardar el pedido.');
             }
           });
+
         } catch (err) {
           console.error("Error al capturar el pago:", err);
-          alert('Ocurrió un error al confirmar el pago. Por favor intenta nuevamente.');
+          alert('Ocurrió un error al confirmar el pago.');
         }
       },
       onError: (err: any) => {

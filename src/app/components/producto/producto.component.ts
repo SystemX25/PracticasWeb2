@@ -58,6 +58,10 @@ export class ProductoComponent implements OnInit {
     this.router.navigate(['/inventario']);
   }
 
+  irPedidos():void{
+    this.router.navigate(['/pedidos'])
+  }
+
   get productosFiltrados(): Producto[] {
     if (!this.terminoBusqueda.trim()) return this.productos;
     return this.productos.filter(producto =>
