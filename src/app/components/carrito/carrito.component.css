@@ -111,7 +111,7 @@
 .producto-nombre {
   font-weight: 600;
   color: #8b4513; /* color-carne-cocida */
-  font-size: 18px;
+  font-size: 26px;
   display: block;
   margin-bottom: 8px;
   position: relative;
@@ -126,7 +126,7 @@
 .producto-precio {
   color: #ff4500; /* color-salsa-ketchup */
   font-weight: 700;
-  font-size: 16px;
+  font-size: 24px;
   display: block;
   margin-bottom: 4px;
 }
@@ -138,7 +138,7 @@
 
 .producto-stock {
   color: #666666; /* color-gris */
-  font-size: 14px;
+  font-size: 24px;
   display: block;
 }
 
@@ -207,7 +207,7 @@
   min-width: 40px;
   text-align: center;
   color: #8b4513; /* color-carne-cocida */
-  font-size: 16px;
+  font-size: 24px;
   background: #ffffff;
   padding: 4px 8px;
   border-radius: 8px;
@@ -238,7 +238,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
-  font-size: 16px;
+  font-size: 20px;
   color: #8b4513; /* color-carne-cocida */
   font-weight: 500;
 }
