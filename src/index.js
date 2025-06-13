@@ -14,6 +14,9 @@
     const productosRouter = require('./app/routes/productos.js');
     app.use('/api/productos', productosRouter);
     
+    const pedidoRouter = require('./app/routes/pedidos.js');
+    app.use('/api/pedidos', pedidoRouter);
+
     const usuariosRouter = require('./app/routes/user.js');
     app.use('/api/user', usuariosRouter);
 

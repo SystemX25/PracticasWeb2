@@ -1,0 +1,24 @@
+<h2 class="titulo">🍔 Mis Pedidos</h2>
+
+<div *ngIf="pedidos.length === 0" class="mensaje-vacio">
+  <p>No hay pedidos registrados.</p>
+</div>
+
+<div *ngFor="let pedido of pedidos" class="pedido-card">
+  <h3>🧾 Pedido #{{ pedido.id }}</h3>
+  <p><strong>Fecha:</strong> {{ pedido.fecha | date:'short' }}</p>
+  <p><strong>Total:</strong> ${{ pedido.total | number:'1.2-2' }}</p>
+
+  <div class="productos-lista">
+    <p><strong>Productos:</strong></p>
+    <ul>
+      <li *ngFor="let prod of pedido.productos">
+        🍔 {{ prod.nombre }} x{{ prod.cantidad }} - ${{ prod.precio }}
+      </li>
+    </ul>
+  </div>
+  <hr>
+</div>
+
+
+

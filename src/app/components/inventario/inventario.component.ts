@@ -53,6 +53,6 @@ export class InventarioComponent {
   }
 
   irAProducto() {
-    this.router.navigate(['']);
+    this.router.navigate(['/productos']);
   }
 }

@@ -1,0 +1,43 @@
+.titulo {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #d35400;
+}
+
+.mensaje-vacio {
+  text-align: center;
+  color: #888;
+  font-size: 1.2rem;
+}
+
+.pedido-card {
+  background-color: #fff3e0;
+  border: 2px solid #e67e22;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 500px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pedido-header h3 {
+  margin: 0;
+  color: #c0392b;
+}
+
+.pedido-header .fecha {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.pedido-detalles {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
