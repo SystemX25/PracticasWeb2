@@ -10,11 +10,11 @@ router.get('/', (req, res) => {
   let sql = 'SELECT * FROM usuarios';
   let params = [];
 
-  if (!nombre || !password) {
+  if (!nombre|| !password) {
     return res.status(500).json({ error: 'Error del servidor' });
   }
 
-  sql += ' WHERE nombre = ? AND password = ?';
+  sql += ' WHERE correo = ? AND password = ?';
   params.push(nombre);
   params.push(password);
 

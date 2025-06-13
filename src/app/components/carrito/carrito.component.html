@@ -12,11 +12,8 @@
           />
           <div class="producto-detalles">
             <span class="producto-nombre">{{ producto.nombre }}</span>
-            <br><br>
-            <span class="producto-precio"
-              style="margin: 71px;">$ {{ producto.precioTotal.toFixed(2) }}</span
-            >
-            <span class="producto-stock">Stock: {{ producto.stock }}</span>
+            <span class="producto-precio">$ {{ producto.precioTotal.toFixed(2) }}</span>
+            <span class="producto-stock">En inventario: {{ producto.stock }}</span>
           </div>
         </div>
         <div class="mover">

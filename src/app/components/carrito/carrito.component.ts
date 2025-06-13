@@ -223,7 +223,6 @@ export class CarritoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   eliminarProducto(id: number ): void {
-    alert(`Producto con ID ${id} eliminado del carrito.`);
     this.carritoService.eliminarProducto(id);
     this.agruparProductos();
   }

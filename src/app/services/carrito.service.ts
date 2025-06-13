@@ -23,6 +23,7 @@ export class CarritoService {
   eliminarProducto(id: number): void {
     const index = this.carrito.findIndex(producto => producto.id === id);
     if (index !== -1) {
+      alert(`Producto eliminado: ${this.carrito[index].nombre}`);
       this.carrito.splice(index, 1);
     }
   }
